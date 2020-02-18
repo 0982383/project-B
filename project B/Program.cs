@@ -10,7 +10,6 @@ namespace project_B
             Console.WriteLine("issie o);
             Console.WriteLine("WHATSUP HOMIES, Mr.PATRIQUE IN DA HOUSE!");
             Console.Wrtieline("Jullie zijn noob , groetjes Tom")
-            Console.WriteLine("Tom");
             Console.WriteLine("Feuzi");
             Console.ReadKey();
         }
