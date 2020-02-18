@@ -7,7 +7,7 @@ namespace project_B
         static void Main(string[] args)
         {   
             Console.WriteLine("Hello World!");
-            Console.WriteLine("Issie");
+            Console.WriteLine("Ismaïl");
             Console.ReadKey();
         }
     }
