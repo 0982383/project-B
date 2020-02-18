@@ -8,6 +8,7 @@ namespace project_B
         {   
             Console.WriteLine("Hello World!");
             Console.WriteLine("Ismaïl");
+            Console.WriteLine("WHATSUP HOMIES, Mr.PATRIQUE IN DA HOUSE!");
             Console.ReadKey();
         }
     }
