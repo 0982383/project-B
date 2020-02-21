@@ -7,9 +7,9 @@ namespace project_B
         static void Main(string[] args)
         {   
             Console.WriteLine("Hello World!");
-            Console.WriteLine("issie o);
+            Console.WriteLine("issie o");
             Console.WriteLine("WHATSUP HOMIES, Mr.PATRIQUE IN DA HOUSE!");
-            Console.Wrtieline("Jullie zijn noob , groetjes Tom")
+            Console.WrtieLine("Jullie zijn noob , groetjes Tom");
             Console.WriteLine("Feuzi");
             Console.ReadKey();
         }
