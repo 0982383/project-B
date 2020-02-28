@@ -9,8 +9,9 @@ namespace project_B
             Console.WriteLine("Hello World!");
             Console.WriteLine("issie o");
             Console.WriteLine("WHATSUP HOMIES, Mr.PATRIQUE IN DA HOUSE!");
-            Console.WrtieLine("Jullie zijn noob , groetjes Tom");
+            Console.WriteLine("Jullie zijn noob , groetjes Tom");
             Console.WriteLine("Feuzi");
+            Console.WriteLine(" Yo dit is een test , 23-2-2020");
             Console.ReadKey();
         }
     }
