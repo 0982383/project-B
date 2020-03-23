@@ -37,6 +37,7 @@ namespace project_B
     }
     public class Movies
     {
+        public int movieID;
         public string MovieName;
         public int MovieDuration;
         public double MoviePrice;
