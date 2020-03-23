@@ -22,15 +22,36 @@ namespace project_B
             Console.WriteLine("Welcome Back " + Username);
         }
     }
-
     public class Customer
     {
+        public string FirstName;
+        public string LastName;
+        public string EMail;
+        public int PhoneNumber;
+
+
         public void Guest()
         {
             Console.WriteLine("Guest");
         }
     }
+    public class Movies
+    {
+        public string MovieName;
+        public int MovieDuration;
+        public double MoviePrice;
 
+    }
+    public class Reservation
+    {
+        public int OrderID;
+        public string CustomerName;
+        public string Seats;
+        public string Movie;
+        public int Price;
+
+
+    }
     class Program
     {
         static void Main(string[] args)
