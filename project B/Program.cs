@@ -26,7 +26,7 @@ namespace project_B
     {
         public string FirstName;
         public string LastName;
-        public string EMail;
+        public string Email;
         public int PhoneNumber;
 
 
@@ -53,6 +53,38 @@ namespace project_B
 
 
     }
+    public class Payment
+    {
+        public string PaymentMethod;
+        public string Price;
+        public int OrderID;
+
+
+    }
+    public class Seats
+    {
+        public  int Hall;
+        public  int SeatNumber;
+        public  int Row;
+    }
+    public class Hall
+    {
+        public int Seats;
+        public int Rows;
+        public string SpecialEffects;
+    }
+    public class Admin
+    {
+        public string Firstname;
+        public string Lastname;
+        public string Email;
+        public int phonenumber;
+
+        public void admin()
+        {
+            Console.WriteLine("Admin");
+        }
+    }   
     class Program
     {
         static void Main(string[] args)
