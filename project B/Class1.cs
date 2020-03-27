@@ -4,13 +4,6 @@ using System.Text;
 
 namespace project_B
 {
-    class Class1
-    {
-    }
-}
-namespace ConsoleAppCinema1
-{
-    //Main class
     class Program
     {
         // Entry point
@@ -47,7 +40,7 @@ namespace ConsoleAppCinema1
                 case "4":
                     return false;
                 default:
-                    return true; 
+                    return true;
 
             }
         }
@@ -85,5 +78,4 @@ namespace ConsoleAppCinema1
 
 
     }
-
-}  
+}
