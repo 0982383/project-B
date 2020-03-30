@@ -6,4 +6,10 @@
     <RootNamespace>project_B</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="OLD_CLASSES_PATRYK_ISMAIL.cs" />
+    <Compile Remove="Old_Code_ISMAIL.cs" />
+    <Compile Remove="OLD_JORDI.cs" />
+  </ItemGroup>
+
 </Project>
