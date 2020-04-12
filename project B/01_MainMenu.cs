@@ -14,7 +14,7 @@ namespace Project_B
             BeginMenu();
         }
 
-    // Main Menu
+        // Main Menu
         public static void BeginMenu()
         {
             string OPT;
@@ -169,12 +169,11 @@ namespace Project_B
                     }
             }
         }
-    // End Main Menu
-
-    //Choose Movie
+        // End Main Menu
+        //Choose Movie
         private static void MovieList(int previousScreen)
         {
-            
+
             Console.Clear();
             Console.WriteLine("-------------------------------");
             Console.WriteLine("Choose Movie:");
@@ -203,52 +202,52 @@ namespace Project_B
             {
                 case "1":
                     {
-                        Jumanji(previousScreen);
+                        venuedate(1);
                         break;
                     }
                 case "2":
                     {
-                        HarryPotter(previousScreen);
+                        venuedate(2);
                         break;
                     }
                 case "3":
                     {
-                        RideAlong2(previousScreen);
+                        venuedate(3);
                         break;
                     }
                 case "4":
                     {
-                        SpencerConfidential(previousScreen);
+                        venuedate(4);
                         break;
                     }
                 case "5":
                     {
-                        FastAndFurious(previousScreen);
+                        venuedate(5);
                         break;
                     }
                 case "6":
                     {
-                        SixUnderground(previousScreen);
+                        venuedate(6);
                         break;
                     }
                 case "7":
                     {
-                        DeadPool2(previousScreen);
+                        venuedate(7);
                         break;
                     }
                 case "8":
                     {
-                        Funeral(previousScreen);
+                        venuedate(8);
                         break;
                     }
                 case "9":
                     {
-                        RushHou3(previousScreen);
+                        venuedate(9);
                         break;
                     }
                 case "10":
                     {
-                        TheDarkKnight(previousScreen);
+                        venuedate(10);
                         break;
                     }
                 case "11":
@@ -630,7 +629,7 @@ namespace Project_B
 
             // Show all Seats
             string showSeats = "    ";
-            string[] seats = new string [hall];
+            string[] seats = new string[hall];
 
             //Different Halls
             if (hall == 1)
@@ -648,10 +647,10 @@ namespace Project_B
             // End Different Hall
 
             for (int z = 0; z < seats.Length; z++)
-            {   
-                seats[z] = "" + (z+1);  // puts number in aray
-                Console.Write(z+1 + " ");  // writes seatnumber on console
-                if ((z+1) % 10 == 0)
+            {
+                seats[z] = "" + (z + 1);  // puts number in aray
+                Console.Write(z + 1 + " ");  // writes seatnumber on console
+                if ((z + 1) % 10 == 0)
                 {
                     Console.WriteLine("\n"); // every 10 seats new line
                 }
@@ -683,7 +682,7 @@ namespace Project_B
             switch (input)
             {
                 case "1":
-                    {                      
+                    {
                         //User Input
                         string seatNumber;
                         int seatNumberINT;
@@ -766,6 +765,200 @@ namespace Project_B
             // End User Input Oucome
         }
         //End Choose Seat
+        public static void venuedate(int MViD)
+        {
+            Tuple<int, string>[] VenueMVlist = new Tuple<int, string>[10];
+            string[] MVList = new string[10] { "Jumanji", "Harry Potter", "Ride Along 2", "Spencer Confidential", "Fast & Furious", "6 Underground", "Deadpool 2", "Death at a Funeral", "Rush hour 3", "The Dark Knight" };
+            for (int i = 0; i < 10; i++)
+            {
+                if (i < 3)
+                {
+                    VenueMVlist[i] = Tuple.Create(1, MVList[i]);
+                }
+                else if(i < 6)
+                {
+                    VenueMVlist[i] = Tuple.Create(2, MVList[i]);
+                }
+                else
+                {
+                    VenueMVlist[i] = Tuple.Create(3, MVList[i]);
+                }
+               
+            }
+            string[] mvTimes = new string[5] { "Wednesday: 11:30 - 16:00 - 19:00 ", "Thursday: 11:30 - 16:00 - 19:00", "Tuesday:  11:30 - 16:00 - 19:00", "Monday: 11:30 - 16:00 - 19:00", "Friday: 11:30 - 16:00 - 19:00"};
+            Tuple<string, string>[] VnDate1 = new Tuple<string, string>[5];
+            Tuple<string, string>[] VnDate2 = new Tuple<string, string>[5];
+            Tuple<string, string>[] VnDate3 = new Tuple<string, string>[5];
+            for (int k = 0; k < 5; k++)
+            {
+                VnDate1[k] = Tuple.Create("Venue 1", mvTimes[k]);
+                VnDate2[k] = Tuple.Create("Venue 2", mvTimes[k]);
+                VnDate3[k] = Tuple.Create("Venue 3", mvTimes[k]);
+            }
+            string TL = "-------------------------------";
+            string DVe = "Venue's and Time:";
+            string plw = "Please write down the venue number and time in the following format to continue:";
+            string frmat = "Venue#/##:##";
+            Console.Clear();
+            if (MViD == 1)
+            {
+                string Choice;
+                Console.WriteLine(TL);
+                Console.WriteLine("Selected movie:" + MVList[0]);
+                Console.WriteLine(TL);
+                Console.WriteLine(DVe);
+                Console.WriteLine(VnDate1[0].Item1 + ": " + VnDate1[0].Item2);
+                Console.WriteLine(VnDate3[4].Item1 + ": " + VnDate3[4].Item2);
+                Console.WriteLine(TL);
+                Console.WriteLine(plw);
+                Console.WriteLine(frmat);
+                Console.WriteLine(TL);
+                Console.Write("Input:");
+                Choice = Console.ReadLine().ToLower();
+
+            }
+            else if(MViD == 2)
+            {
+                string Choice;
+                Console.WriteLine(TL);
+                Console.WriteLine("Selected movie:" + MVList[1]);
+                Console.WriteLine(TL);
+                Console.WriteLine(DVe);
+                Console.WriteLine(VnDate1[1].Item1 + ": " + VnDate1[1].Item2);
+                Console.WriteLine(VnDate2[4].Item1 + ": " + VnDate2[4].Item2);
+                Console.WriteLine(TL);
+                Console.WriteLine(plw);
+                Console.WriteLine(frmat);
+                Console.WriteLine(TL);
+                Console.Write("Input:");
+                Choice = Console.ReadLine().ToLower();
+            }
+            else if(MViD == 3)
+            {
+                string Choice;
+                Console.WriteLine(TL);
+                Console.WriteLine("Selected movie:" + MVList[2]);
+                Console.WriteLine(TL);
+                Console.WriteLine(DVe);
+                Console.WriteLine(VnDate2[0].Item1 + ": " + VnDate2[0].Item2);
+                Console.WriteLine(VnDate3[1].Item1 + ": " + VnDate3[1].Item2);
+                Console.WriteLine(TL);
+                Console.WriteLine(plw);
+                Console.WriteLine(frmat);
+                Console.WriteLine(TL);
+                Console.Write("Input:");
+                Choice = Console.ReadLine().ToLower();
+            }
+            else if(MViD == 4)
+            {
+                string Choice;
+                Console.WriteLine(TL);
+                Console.WriteLine("Selected movie:" + MVList[3]);
+                Console.WriteLine(TL);
+                Console.WriteLine(DVe);
+                Console.WriteLine(VnDate1[2].Item1 + ": " + VnDate1[2].Item2);
+                Console.WriteLine(TL);
+                Console.WriteLine(plw);
+                Console.WriteLine(frmat);
+                Console.WriteLine(TL);
+                Console.Write("Input:");
+                Choice = Console.ReadLine().ToLower();
+            }
+            else if (MViD == 5)
+            {
+                string Choice;
+                Console.WriteLine(TL);
+                Console.WriteLine("Selected movie:" + MVList[4]);
+                Console.WriteLine(TL);
+                Console.WriteLine(DVe);
+                Console.WriteLine(VnDate2[3].Item1 + ": " + VnDate2[3].Item2);
+                Console.WriteLine(VnDate3[0].Item1 + ": " + VnDate3[0].Item2);
+                Console.WriteLine(TL);
+                Console.WriteLine(plw);
+                Console.WriteLine(frmat);
+                Console.WriteLine(TL);
+                Console.Write("Input:");
+                Choice = Console.ReadLine().ToLower();
+            }
+            else if (MViD == 6)
+            {
+                string Choice;
+                Console.WriteLine(TL);
+                Console.WriteLine("Selected movie:" + MVList[5]);
+                Console.WriteLine(TL);
+                Console.WriteLine(DVe);
+                Console.WriteLine(VnDate1[4].Item1 + ": " + VnDate1[4].Item2);
+                Console.WriteLine(TL);
+                Console.WriteLine(plw);
+                Console.WriteLine(frmat);
+                Console.WriteLine(TL);
+                Console.Write("Input:");
+                Choice = Console.ReadLine().ToLower();
+            }
+            else if (MViD == 7)
+            {
+                string Choice;
+                Console.WriteLine(TL);
+                Console.WriteLine("Selected movie:" + MVList[6]);
+                Console.WriteLine(TL);
+                Console.WriteLine(DVe);
+                Console.WriteLine(VnDate2[2].Item1 + ": " + VnDate2[2].Item2);
+                Console.WriteLine(TL);
+                Console.WriteLine(plw);
+                Console.WriteLine(frmat);
+                Console.WriteLine(TL);
+                Console.Write("Input:");
+                Choice = Console.ReadLine().ToLower();
+            }
+            else if(MViD == 8)
+            {
+                string Choice;
+                Console.WriteLine(TL);
+                Console.WriteLine("Selected movie:" + MVList[7]);
+                Console.WriteLine(TL);
+                Console.WriteLine(DVe);
+                Console.WriteLine(VnDate1[3].Item1 + ": " + VnDate1[3].Item2);
+                Console.WriteLine(TL);
+                Console.WriteLine(plw);
+                Console.WriteLine(frmat);
+                Console.WriteLine(TL);
+                Console.Write("Input:");
+                Choice = Console.ReadLine().ToLower();
+            }
+            else if(MViD == 9)
+            {
+                string Choice;
+                Console.WriteLine(TL);
+                Console.WriteLine("Selected movie:" + MVList[8]);
+                Console.WriteLine(TL);
+                Console.WriteLine(DVe);
+                Console.WriteLine(VnDate2[1].Item1 + ": " + VnDate2[1].Item2);
+                Console.WriteLine(VnDate3[3].Item1 + ": " + VnDate3[3].Item2);
+                Console.WriteLine(TL);
+                Console.WriteLine(plw);
+                Console.WriteLine(frmat);
+                Console.WriteLine(TL);
+                Console.Write("Input:");
+                Choice = Console.ReadLine().ToLower();
+            }
+            else if(MViD == 10)
+            {
+                string Choice;
+                Console.WriteLine(TL);
+                Console.WriteLine("Selected movie:" + MVList[9]);
+                Console.WriteLine(TL);
+                Console.WriteLine(DVe);
+                Console.WriteLine(VnDate3[2].Item1 + ": " + VnDate3[2].Item2);
+                Console.WriteLine(TL);
+                Console.WriteLine(plw);
+                Console.WriteLine(frmat);
+                Console.WriteLine(TL);
+                Console.Write("Input:");
+                Choice = Console.ReadLine().ToLower();
+            }
+        }
+
     }
+
 }
 
