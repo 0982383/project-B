@@ -1016,7 +1016,243 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
             }
         }
+        public static void Payment()
+        {
 
+
+            Console.WriteLine("                                                -Choose your payment method-\n\n");
+            Console.WriteLine("                                             Type in the number of your paymentmethod\n");
+
+
+            string[] paymentMethods = new string[6] { "1) Paypal\n", "2) IDeal\n", "3) Creditcard\n", "4) Bitcoin\n", "5) Apple Pay\n", "6) Google Pay\n" };
+
+
+            Console.WriteLine(paymentMethods[0]);
+            Console.WriteLine(paymentMethods[1]);
+            Console.WriteLine(paymentMethods[2]);
+            Console.WriteLine(paymentMethods[3]);
+            Console.WriteLine(paymentMethods[4]);
+            Console.WriteLine(paymentMethods[5]);
+
+
+            string num = Console.ReadLine();
+
+            int num2 = Int32.Parse(num);
+
+            if (num2 == 1)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[0]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[0] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+
+            if (num2 == 2)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[1]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[1] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+                    else
+                    {
+                        Console.WriteLine("you did not type the space bar :/");
+                    }
+
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+
+            if (num2 == 3)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[2]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[2] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+                    else
+                    {
+                        Console.WriteLine("you did not type the space bar :/");
+                    }
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+
+            if (num2 == 4)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[3]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[3] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+                    else
+                    {
+                        Console.WriteLine("you did not type the space bar :/");
+                    }
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+
+            if (num2 == 5)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[4]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[4] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+                    else
+                    {
+                        Console.WriteLine("you did not type the space bar :/");
+                    }
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+
+            if (num2 == 6)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[5]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[5] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+                    else
+                    {
+                        Console.WriteLine("you did not type the space bar :/");
+                    }
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+
+
+
+
+
+
+        }
     }
 
 }
