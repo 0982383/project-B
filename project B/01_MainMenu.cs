@@ -74,12 +74,12 @@ namespace Project_B
                     }
                 case "2":
                     {
-                        //Offers();
+                        Offers();
                         break;
                     }
                 case "3":
                     {
-                        //AboutUs();
+                        AboutUs();
                         break;
                     }
             }
@@ -1246,14 +1246,63 @@ namespace Project_B
                     Console.WriteLine("you did not type the enter button :/");
                 }
             }
+        }
 
+        public static void AboutUs()
+        {
+            string input;
+            Console.WriteLine("About Us\r\n");
+            Console.WriteLine("CinemaWorld has 3 venues with a capacity of 150, 300 and 500 seats respectively.\r\n" +
+                              "The team consist of the owner, Jake Darcy, the ticket office clerk, Art Brown, and Sally Buns.\r\n" +
+                              "Jake is a film aficionado pur sang. He watches all movies and knows most actors and their histories by heart.\r\n" +
+                              "He writes reviews of films in several magazines.This cinema is a dream come true for him, and the first in a great chain of cinemas to be. \r\n" +
+                              "Art welcomes the customers and checks their tickets or reservations.\r\n" +
+                              "He needs to be the face of the cinema experience.\r\n" +
+                              "Sally Buns runs the theaters café and bar on a franchise basis.\r\n");
+            Console.WriteLine("Press 1: Back");
+            Console.Write("input: ");
 
+            input = Console.ReadLine();
 
+            Console.Clear();
 
+            switch (input)
+            {
+                case "1":
+                    {
+                        CustomerMenu();
+                        break;
+                    }
+            }
+        }
 
+        public static void Offers()
+        {
+            string input;
+            Console.WriteLine("These are our offers:\r\n");
+            Console.WriteLine("10% Discount (Valid for 65+, teens (12 to 17)\r\n");
+            Console.WriteLine("Press 1: Get Discount");
+            Console.WriteLine("Press 2: Back");
+            Console.WriteLine("Input: ");
 
+            input = Console.ReadLine();
+
+            Console.Clear();
+
+            switch (input)
+            {
+                case "1":
+                    {
+                        MovieList(1);
+                        break;
+                    }
+                case "2":
+                    {
+                        CustomerMenu();
+                        break;
+                    }
+            }
         }
     }
-
 }
 
