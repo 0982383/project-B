@@ -121,7 +121,8 @@ namespace Project_B
             string input;
             Console.WriteLine("Manager Menu");
             Console.WriteLine("Press 1: Choose a Movie");
-            Console.WriteLine("Press 2: Back");
+            Console.WriteLine("Press 2: Show Daily Revenue");
+            Console.WriteLine("Press 3: Back");
             Console.Write("Input: ");
 
             input = Console.ReadLine();
@@ -137,6 +138,11 @@ namespace Project_B
                     }
                 case "2":
                     {
+                        ShowDailyRevenue(1);
+                        break;
+                    }
+                case "3":
+                    {
                         StaffMenu();
                         break;
                     }
@@ -151,7 +157,8 @@ namespace Project_B
             Console.WriteLine("Employee Menu");
             Console.WriteLine("1: Choose a Movie");
             Console.WriteLine("2: Add or remove a Movie");
-            Console.WriteLine("3: Back");
+            Console.WriteLine("3: Show Daily Revenue");
+            Console.WriteLine("4: Back");
             Console.Write("Input: ");
 
 
@@ -172,6 +179,11 @@ namespace Project_B
                         break;
                     }
                 case "3":
+                    {
+                        ShowDailyRevenue(2);
+                        break;
+                    }
+                case "4":
                     {
                         StaffMenu();
                         break;
@@ -1300,6 +1312,35 @@ namespace Project_B
                     {
                         CustomerMenu();
                         break;
+                    }
+            }
+        }
+
+        public static void ShowDailyRevenue(int i)
+        {
+            string input;
+            Console.WriteLine($"This is the daily revenue: \r\n");
+            Console.WriteLine("Press 1: Back");
+            Console.Write("Input: ");
+
+            input = Console.ReadLine();
+
+            Console.Clear();
+
+            switch (input)
+            {
+                case "1":
+                    {
+                        if (i == 1)
+                        {
+                            Manager();
+                            break;
+                        } 
+                        else
+                        {
+                            Employee();
+                            break;
+                        }
                     }
             }
         }
