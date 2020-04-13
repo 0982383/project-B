@@ -959,7 +959,7 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
             }
         }
-        static void Payment()
+        public static void Payment()
         {
 
 
