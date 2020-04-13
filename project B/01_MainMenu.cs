@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -174,22 +176,22 @@ namespace Project_B
         private static void MovieList(int previousScreen)
         {
 
-            Console.Clear();
+            var JsonString = File.ReadAllText("List.json.");
+            var JObject1 = JObject.Parse(JsonString);
+            Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
+            var myList = JObject1.SelectTokens("$.MyListOfMovies").Values<string>().ToList();
             Console.WriteLine("-------------------------------");
-            Console.WriteLine("Choose Movie:");
-            Console.WriteLine("-------------------------------");
-            Console.WriteLine("1) Jumanji");
-            Console.WriteLine("2) Harry Potter");
-            Console.WriteLine("3) Ride Along 2");
-            Console.WriteLine("4) Spencer Confidential");
-            Console.WriteLine("5) Fast & Furious");
-            Console.WriteLine("6) 6 Underground");
-            Console.WriteLine("7) DeadPool 2");
-            Console.WriteLine("8) Death at a Funeral");
-            Console.WriteLine("9) Rush Hour 3");
-            Console.WriteLine("10) The Dark Knight");
-            Console.WriteLine("11) Back");
-            Console.WriteLine();
+            Console.WriteLine(myList[0].ToString());
+            Console.WriteLine(myList[1].ToString());
+            Console.WriteLine(myList[2].ToString());
+            Console.WriteLine(myList[3].ToString());
+            Console.WriteLine(myList[4].ToString());
+            Console.WriteLine(myList[5].ToString());
+            Console.WriteLine(myList[6].ToString());
+            Console.WriteLine(myList[7].ToString());
+            Console.WriteLine(myList[8].ToString());
+            Console.WriteLine(myList[9].ToString());
+            Console.WriteLine(myList[10].ToString());
             Console.WriteLine("-------------------------------");
             Console.Write("\r\nSelect Movie: ");
 
