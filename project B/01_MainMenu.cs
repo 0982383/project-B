@@ -4,6 +4,7 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 
 namespace Project_B
@@ -149,7 +150,8 @@ namespace Project_B
             string input;
             Console.WriteLine("Employee Menu");
             Console.WriteLine("1: Choose a Movie");
-            Console.WriteLine("2: Back");
+            Console.WriteLine("2: Add or remove a Movie");
+            Console.WriteLine("3: Back");
             Console.Write("Input: ");
 
 
@@ -166,6 +168,68 @@ namespace Project_B
                     }
                 case "2":
                     {
+                        AddMovie();
+                        break;
+                    }
+                case "3":
+                    {
+                        StaffMenu();
+                        break;
+                    }
+            }
+        }
+
+        public static void AddMovie()
+        {
+            // UNDER PROGRESS @Patryk
+            var JsonString = File.ReadAllText("List.json");
+            var JObject1 = JArray.Parse(JsonString);
+            Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
+            var myList = JObject1.SelectTokens("$.MyListOfMovies").Values<string>().ToList();
+
+            Console.WriteLine("-------------------------------");
+            for (int i = 0; i < myList.Count; i++)
+            {
+                Console.WriteLine(myList[i].ToString());
+            }
+            Console.WriteLine("-------------------------------");
+            
+
+            string input;
+            Console.WriteLine("\n\n");
+            Console.WriteLine("1: Addmovie");
+            Console.WriteLine("2: Back");
+            Console.Write("Input: ");
+
+
+            input = Console.ReadLine();
+
+            Console.Clear();
+
+            switch (input)
+            {
+                case "1":
+                    {
+                        string AddMovieInput = Console.ReadLine();
+                        int Counter = myList.Count + 1;
+                        string Combine = Counter + ") " + AddMovieInput;
+
+                        var initialJSON = File.ReadAllText(@"List.Json");
+
+
+                        JArray MovieArray = JArray.Parse(initialJSON);
+                        var MovieAdder = new JObject();
+                        MovieAdder["MyListOfMovies"] = Combine;
+                        MovieArray.Add(MovieAdder);
+                       
+
+                        JsonConvert.SerializeObject(MovieArray, Formatting.Indented);
+                        //File.AppendAllText(@"List.Json", Combine.ToString());
+                        AddMovie();
+                        break;
+                    }
+                case "2":
+                    {
                         StaffMenu();
                         break;
                     }
@@ -175,23 +239,16 @@ namespace Project_B
         //Choose Movie
         private static void MovieList(int previousScreen)
         {
-
-            var JsonString = File.ReadAllText("List.json.");
+            var JsonString = File.ReadAllText("List.json");
             var JObject1 = JObject.Parse(JsonString);
             Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
             var myList = JObject1.SelectTokens("$.MyListOfMovies").Values<string>().ToList();
             Console.WriteLine("-------------------------------");
-            Console.WriteLine(myList[0].ToString());
-            Console.WriteLine(myList[1].ToString());
-            Console.WriteLine(myList[2].ToString());
-            Console.WriteLine(myList[3].ToString());
-            Console.WriteLine(myList[4].ToString());
-            Console.WriteLine(myList[5].ToString());
-            Console.WriteLine(myList[6].ToString());
-            Console.WriteLine(myList[7].ToString());
-            Console.WriteLine(myList[8].ToString());
-            Console.WriteLine(myList[9].ToString());
-            Console.WriteLine(myList[10].ToString());
+            for (int i = 0; i < myList.Count; i++)
+            {
+                Console.WriteLine(myList[i].ToString());
+            }
+            Console.WriteLine("11) Exit");
             Console.WriteLine("-------------------------------");
             Console.Write("\r\nSelect Movie: ");
 
