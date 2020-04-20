@@ -194,7 +194,7 @@ namespace Project_B
         public static void AddMovie()
         {
             // UNDER PROGRESS @Patryk
-            var JsonString = File.ReadAllText("List.json");
+            var JsonString = File.ReadAllText("@List.json");
             var JObject1 = JObject.Parse(JsonString);
             Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
             var myList = JObject1.SelectTokens("$.MyListOfMovies").Values<string>().ToList();
@@ -227,7 +227,7 @@ namespace Project_B
                         string Combine = Counter + ") " + AddMovieInput;
 
                         //Opening JSON file that needs to be modified
-                        var initialJSON = File.ReadAllText(@"List.Json");
+                        var initialJSON = File.ReadAllText("@List.json");
                         dynamic jsonArray = JsonConvert.DeserializeObject(initialJSON);
 
                         //Adding the movie
@@ -235,7 +235,7 @@ namespace Project_B
 
                         //Saving and Closing JSON File
                         string output = JsonConvert.SerializeObject(jsonArray, Formatting.Indented);
-                        File.WriteAllText("List.Json", output);
+                        File.WriteAllText("@List.json", output);
                         //Saving and Closing JSON File
 
                         Console.Clear();
@@ -248,7 +248,7 @@ namespace Project_B
                         int removeMovie = Convert.ToInt32(Console.ReadLine());
 
                         //Opening JSON file that needs to be modified
-                        var initialJSON = File.ReadAllText(@"List.Json");
+                        var initialJSON = File.ReadAllText("@List.json");
                         dynamic jsonArray = JsonConvert.DeserializeObject(initialJSON);
 
                         //Removing the movies
@@ -256,7 +256,7 @@ namespace Project_B
 
                         //Saving and Closing JSON File
                         string output = JsonConvert.SerializeObject(jsonArray, Formatting.Indented);
-                        File.WriteAllText("List.Json", output);
+                        File.WriteAllText("@List.json", output);
                         //Saving and Closing JSON File
 
                         Console.Clear();
@@ -275,7 +275,7 @@ namespace Project_B
         //Choose Movie
         private static void MovieList(int previousScreen)
         {
-            var JsonString = File.ReadAllText("List.json");
+            var JsonString = File.ReadAllText("@List.json");
             var JObject1 = JObject.Parse(JsonString);
             Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
             var myList = JObject1.SelectTokens("$.MyListOfMovies").Values<string>().ToList();
