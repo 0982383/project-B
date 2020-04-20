@@ -799,6 +799,7 @@ namespace Project_B
             string DVe = "Venue's and Time:";
             string plw = "Please write down the venue number and time in the following format to continue:";
             string frmat = "Venue#/##:##";
+
             Console.Clear();
             if (MViD == 1)
             {
