@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
+using System.IO;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 
 namespace Project_B
@@ -71,12 +74,12 @@ namespace Project_B
                     }
                 case "2":
                     {
-                        //Offers();
+                        Offers();
                         break;
                     }
                 case "3":
                     {
-                        //AboutUs();
+                        AboutUs();
                         break;
                     }
             }
@@ -118,7 +121,8 @@ namespace Project_B
             string input;
             Console.WriteLine("Manager Menu");
             Console.WriteLine("Press 1: Choose a Movie");
-            Console.WriteLine("Press 2: Back");
+            Console.WriteLine("Press 2: Show Daily Revenue");
+            Console.WriteLine("Press 3: Back");
             Console.Write("Input: ");
 
             input = Console.ReadLine();
@@ -134,6 +138,11 @@ namespace Project_B
                     }
                 case "2":
                     {
+                        ShowDailyRevenue(1);
+                        break;
+                    }
+                case "3":
+                    {
                         StaffMenu();
                         break;
                     }
@@ -147,7 +156,9 @@ namespace Project_B
             string input;
             Console.WriteLine("Employee Menu");
             Console.WriteLine("1: Choose a Movie");
-            Console.WriteLine("2: Back");
+            Console.WriteLine("2: Add or remove a Movie");
+            Console.WriteLine("3: Show Daily Revenue");
+            Console.WriteLine("4: Back");
             Console.Write("Input: ");
 
 
@@ -164,6 +175,73 @@ namespace Project_B
                     }
                 case "2":
                     {
+                        AddMovie();
+                        break;
+                    }
+                case "3":
+                    {
+                        ShowDailyRevenue(2);
+                        break;
+                    }
+                case "4":
+                    {
+                        StaffMenu();
+                        break;
+                    }
+            }
+        }
+
+        public static void AddMovie()
+        {
+            // UNDER PROGRESS @Patryk
+            var JsonString = File.ReadAllText("List.json");
+            var JObject1 = JArray.Parse(JsonString);
+            Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
+            var myList = JObject1.SelectTokens("$.MyListOfMovies").Values<string>().ToList();
+
+            Console.WriteLine("-------------------------------");
+            for (int i = 0; i < myList.Count; i++)
+            {
+                Console.WriteLine(myList[i].ToString());
+            }
+            Console.WriteLine("-------------------------------");
+            
+
+            string input;
+            Console.WriteLine("\n\n");
+            Console.WriteLine("1: Addmovie");
+            Console.WriteLine("2: Back");
+            Console.Write("Input: ");
+
+
+            input = Console.ReadLine();
+
+            Console.Clear();
+
+            switch (input)
+            {
+                case "1":
+                    {
+                        string AddMovieInput = Console.ReadLine();
+                        int Counter = myList.Count + 1;
+                        string Combine = Counter + ") " + AddMovieInput;
+
+                        var initialJSON = File.ReadAllText(@"List.Json");
+
+
+                        JArray MovieArray = JArray.Parse(initialJSON);
+                        var MovieAdder = new JObject();
+                        MovieAdder["MyListOfMovies"] = Combine;
+                        MovieArray.Add(MovieAdder);
+                       
+
+                        JsonConvert.SerializeObject(MovieArray, Formatting.Indented);
+                        //File.AppendAllText(@"List.Json", Combine.ToString());
+                        AddMovie();
+                        break;
+                    }
+                case "2":
+                    {
                         StaffMenu();
                         break;
                     }
@@ -173,23 +251,16 @@ namespace Project_B
         //Choose Movie
         private static void MovieList(int previousScreen)
         {
-
-            Console.Clear();
+            var JsonString = File.ReadAllText("List.json");
+            var JObject1 = JObject.Parse(JsonString);
+            Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
+            var myList = JObject1.SelectTokens("$.MyListOfMovies").Values<string>().ToList();
             Console.WriteLine("-------------------------------");
-            Console.WriteLine("Choose Movie:");
-            Console.WriteLine("-------------------------------");
-            Console.WriteLine("1) Jumanji");
-            Console.WriteLine("2) Harry Potter");
-            Console.WriteLine("3) Ride Along 2");
-            Console.WriteLine("4) Spencer Confidential");
-            Console.WriteLine("5) Fast & Furious");
-            Console.WriteLine("6) 6 Underground");
-            Console.WriteLine("7) DeadPool 2");
-            Console.WriteLine("8) Death at a Funeral");
-            Console.WriteLine("9) Rush Hour 3");
-            Console.WriteLine("10) The Dark Knight");
-            Console.WriteLine("11) Back");
-            Console.WriteLine();
+            for (int i = 0; i < myList.Count; i++)
+            {
+                Console.WriteLine(myList[i].ToString());
+            }
+            Console.WriteLine("11) Exit");
             Console.WriteLine("-------------------------------");
             Console.Write("\r\nSelect Movie: ");
 
@@ -958,8 +1029,322 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
             }
         }
+        public static void Payment()
+        {
 
+
+            Console.WriteLine("                                                -Choose your payment method-\n\n");
+            Console.WriteLine("                                             Type in the number of your paymentmethod\n");
+
+
+            string[] paymentMethods = new string[6] { "1) Paypal\n", "2) IDeal\n", "3) Creditcard\n", "4) Bitcoin\n", "5) Apple Pay\n", "6) Google Pay\n" };
+
+
+            Console.WriteLine(paymentMethods[0]);
+            Console.WriteLine(paymentMethods[1]);
+            Console.WriteLine(paymentMethods[2]);
+            Console.WriteLine(paymentMethods[3]);
+            Console.WriteLine(paymentMethods[4]);
+            Console.WriteLine(paymentMethods[5]);
+
+
+            string num = Console.ReadLine();
+
+            int num2 = Int32.Parse(num);
+
+            if (num2 == 1)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[0]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[0] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+
+            if (num2 == 2)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[1]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[1] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+                    else
+                    {
+                        Console.WriteLine("you did not type the space bar :/");
+                    }
+
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+
+            if (num2 == 3)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[2]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[2] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+                    else
+                    {
+                        Console.WriteLine("you did not type the space bar :/");
+                    }
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+
+            if (num2 == 4)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[3]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[3] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+                    else
+                    {
+                        Console.WriteLine("you did not type the space bar :/");
+                    }
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+
+            if (num2 == 5)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[4]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[4] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+                    else
+                    {
+                        Console.WriteLine("you did not type the space bar :/");
+                    }
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+
+            if (num2 == 6)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[5]);
+                Console.WriteLine("press Enter to continue to the payment page");
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.Clear();
+                    Console.Beep();
+                    Console.WriteLine(paymentMethods[5] + "\n");
+                    Console.WriteLine("Press the spacebar button to complete the transaction ");
+                    ConsoleKeyInfo keyInfo1;
+                    keyInfo1 = Console.ReadKey();
+                    if (keyInfo1.Key == ConsoleKey.Spacebar)
+                    {
+                        Console.WriteLine("Transaction completed. \n Thank you for you payment.");
+                        Console.Beep();
+                    }
+                    else
+                    {
+                        Console.WriteLine("you did not type the space bar :/");
+                    }
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("you did not type the enter button :/");
+                }
+            }
+        }
+
+        public static void AboutUs()
+        {
+            string input;
+            Console.WriteLine("About Us\r\n");
+            Console.WriteLine("CinemaWorld has 3 venues with a capacity of 150, 300 and 500 seats respectively.\r\n" +
+                              "The team consist of the owner, Jake Darcy, the ticket office clerk, Art Brown, and Sally Buns.\r\n" +
+                              "Jake is a film aficionado pur sang. He watches all movies and knows most actors and their histories by heart.\r\n" +
+                              "He writes reviews of films in several magazines.This cinema is a dream come true for him, and the first in a great chain of cinemas to be. \r\n" +
+                              "Art welcomes the customers and checks their tickets or reservations.\r\n" +
+                              "He needs to be the face of the cinema experience.\r\n" +
+                              "Sally Buns runs the theaters café and bar on a franchise basis.\r\n");
+            Console.WriteLine("Press 1: Back");
+            Console.Write("input: ");
+
+            input = Console.ReadLine();
+
+            Console.Clear();
+
+            switch (input)
+            {
+                case "1":
+                    {
+                        CustomerMenu();
+                        break;
+                    }
+            }
+        }
+
+        public static void Offers()
+        {
+            string input;
+            Console.WriteLine("These are our offers:\r\n");
+            Console.WriteLine("10% Discount (Valid for 65+, teens (12 to 17)\r\n");
+            Console.WriteLine("Press 1: Get Discount");
+            Console.WriteLine("Press 2: Back");
+            Console.WriteLine("Input: ");
+
+            input = Console.ReadLine();
+
+            Console.Clear();
+
+            switch (input)
+            {
+                case "1":
+                    {
+                        MovieList(1);
+                        break;
+                    }
+                case "2":
+                    {
+                        CustomerMenu();
+                        break;
+                    }
+            }
+        }
+
+        public static void ShowDailyRevenue(int i)
+        {
+            string input;
+            Console.WriteLine($"This is the daily revenue: \r\n");
+            Console.WriteLine("Press 1: Back");
+            Console.Write("Input: ");
+
+            input = Console.ReadLine();
+
+            Console.Clear();
+
+            switch (input)
+            {
+                case "1":
+                    {
+                        if (i == 1)
+                        {
+                            Manager();
+                            break;
+                        } 
+                        else
+                        {
+                            Employee();
+                            break;
+                        }
+                    }
+            }
+        }
     }
-
 }
 

@@ -12,4 +12,12 @@
     <Compile Remove="OLD_JORDI.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="bin\Debug\netcoreapp3.1\List.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
 </Project>
