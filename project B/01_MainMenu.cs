@@ -195,7 +195,7 @@ namespace Project_B
         {
             // UNDER PROGRESS @Patryk
             var JsonString = File.ReadAllText("List.json");
-            var JObject1 = JArray.Parse(JsonString);
+            var JObject1 = JObject.Parse(JsonString);
             Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
             var myList = JObject1.SelectTokens("$.MyListOfMovies").Values<string>().ToList();
 
@@ -209,39 +209,63 @@ namespace Project_B
 
             string input;
             Console.WriteLine("\n\n");
-            Console.WriteLine("1: Addmovie");
-            Console.WriteLine("2: Back");
+            Console.WriteLine("1: Add movie");
+            Console.WriteLine("2: Remove movie");
+            Console.WriteLine("3: Back");
             Console.Write("Input: ");
 
-
             input = Console.ReadLine();
-
-            Console.Clear();
 
             switch (input)
             {
                 case "1":
                     {
+                        //Getting movie name
+                        Console.Write("Name of the movie:");
                         string AddMovieInput = Console.ReadLine();
                         int Counter = myList.Count + 1;
                         string Combine = Counter + ") " + AddMovieInput;
 
+                        //Opening JSON file that needs to be modified
                         var initialJSON = File.ReadAllText(@"List.Json");
+                        dynamic jsonArray = JsonConvert.DeserializeObject(initialJSON);
 
+                        //Adding the movie
+                        jsonArray["MyListOfMovies"].Add(Combine);
 
-                        JArray MovieArray = JArray.Parse(initialJSON);
-                        var MovieAdder = new JObject();
-                        MovieAdder["MyListOfMovies"] = Combine;
-                        MovieArray.Add(MovieAdder);
-                       
+                        //Saving and Closing JSON File
+                        string output = JsonConvert.SerializeObject(jsonArray, Formatting.Indented);
+                        File.WriteAllText("List.Json", output);
+                        //Saving and Closing JSON File
 
-                        JsonConvert.SerializeObject(MovieArray, Formatting.Indented);
-                        //File.AppendAllText(@"List.Json", Combine.ToString());
+                        Console.Clear();
                         AddMovie();
                         break;
                     }
                 case "2":
                     {
+                        Console.Write("Choose the movie that you want to remove");
+                        int removeMovie = Convert.ToInt32(Console.ReadLine());
+
+                        //Opening JSON file that needs to be modified
+                        var initialJSON = File.ReadAllText(@"List.Json");
+                        dynamic jsonArray = JsonConvert.DeserializeObject(initialJSON);
+
+                        //Removing the movies
+                        jsonArray["MyListOfMovies"][removeMovie - 1].Remove();
+
+                        //Saving and Closing JSON File
+                        string output = JsonConvert.SerializeObject(jsonArray, Formatting.Indented);
+                        File.WriteAllText("List.Json", output);
+                        //Saving and Closing JSON File
+
+                        Console.Clear();
+                        AddMovie();
+                        break;
+                    }
+                case "3":
+                    {
+                        Console.Clear();
                         StaffMenu();
                         break;
                     }
