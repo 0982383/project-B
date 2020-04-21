@@ -12,7 +12,9 @@ namespace Project_B
     class MainMenu
     {
         static void Main(string[] args)
-        {
+        {   
+            // Sets Revenue to 0
+            ResetRevenue();
             // Begin Program
             BeginMenu();
         }
@@ -194,7 +196,7 @@ namespace Project_B
         public static void AddMovie()
         {
             // UNDER PROGRESS @Patryk
-            var JsonString = File.ReadAllText("@List.json");
+            var JsonString = File.ReadAllText(@"List.json");
             var JObject1 = JObject.Parse(JsonString);
             Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
             var myList = JObject1.SelectTokens("$.MyListOfMovies").Values<string>().ToList();
@@ -227,7 +229,7 @@ namespace Project_B
                         string Combine = Counter + ") " + AddMovieInput;
 
                         //Opening JSON file that needs to be modified
-                        var initialJSON = File.ReadAllText("@List.json");
+                        var initialJSON = File.ReadAllText(@"List.json");
                         dynamic jsonArray = JsonConvert.DeserializeObject(initialJSON);
 
                         //Adding the movie
@@ -235,7 +237,7 @@ namespace Project_B
 
                         //Saving and Closing JSON File
                         string output = JsonConvert.SerializeObject(jsonArray, Formatting.Indented);
-                        File.WriteAllText("@List.json", output);
+                        File.WriteAllText(@"List.json", output);
                         //Saving and Closing JSON File
 
                         Console.Clear();
@@ -248,7 +250,7 @@ namespace Project_B
                         int removeMovie = Convert.ToInt32(Console.ReadLine());
 
                         //Opening JSON file that needs to be modified
-                        var initialJSON = File.ReadAllText("@List.json");
+                        var initialJSON = File.ReadAllText(@"List.json");
                         dynamic jsonArray = JsonConvert.DeserializeObject(initialJSON);
 
                         //Removing the movies
@@ -256,7 +258,7 @@ namespace Project_B
 
                         //Saving and Closing JSON File
                         string output = JsonConvert.SerializeObject(jsonArray, Formatting.Indented);
-                        File.WriteAllText("@List.json", output);
+                        File.WriteAllText(@"List.json", output);
                         //Saving and Closing JSON File
 
                         Console.Clear();
@@ -275,7 +277,7 @@ namespace Project_B
         //Choose Movie
         private static void MovieList(int previousScreen)
         {
-            var JsonString = File.ReadAllText("@List.json");
+            var JsonString = File.ReadAllText(@"List.json");
             var JObject1 = JObject.Parse(JsonString);
             Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
             var myList = JObject1.SelectTokens("$.MyListOfMovies").Values<string>().ToList();
@@ -830,24 +832,7 @@ namespace Project_B
                 case "3":
                     {
                         Console.Clear();
-                        Console.WriteLine("Thank you for purchasing the tickets");
-                        Console.Write("Press anything to go back");
-                        Console.ReadLine();
-                        Console.Clear();
-                        if (previousScreen == 1)
-                        {
-                            CustomerMenu();
-                            break;
-                        }
-                        if (previousScreen == 2)
-                        {
-                            Manager();
-                            break;
-                        }
-                        if (previousScreen == 3)
-                        {
-                            Employee();
-                        }
+                        Payment();
                         break;
                     }
                 case "4":
@@ -1155,8 +1140,12 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
+                        IncrDailyRevenue(10);
                     }
-
+                    else
+                    {
+                        Console.WriteLine("you did not type the space bar :/");
+                    }
 
 
 
@@ -1187,6 +1176,7 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
+                        IncrDailyRevenue(10);
                     }
                     else
                     {
@@ -1223,6 +1213,7 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
+                        IncrDailyRevenue(10);
                     }
                     else
                     {
@@ -1258,6 +1249,7 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
+                        IncrDailyRevenue(10);
                     }
                     else
                     {
@@ -1293,6 +1285,7 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
+                        IncrDailyRevenue(10);
                     }
                     else
                     {
@@ -1328,6 +1321,7 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
+                        IncrDailyRevenue(10);
                     }
                     else
                     {
@@ -1357,7 +1351,7 @@ namespace Project_B
                               "He needs to be the face of the cinema experience.\r\n" +
                               "Sally Buns runs the theaters café and bar on a franchise basis.\r\n");
             Console.WriteLine("Press 1: Back");
-            Console.Write("input: ");
+            Console.Write("Input: ");
 
             input = Console.ReadLine();
 
@@ -1380,7 +1374,7 @@ namespace Project_B
             Console.WriteLine("10% Discount (Valid for 65+, teens (12 to 17)\r\n");
             Console.WriteLine("Press 1: Get Discount");
             Console.WriteLine("Press 2: Back");
-            Console.WriteLine("Input: ");
+            Console.Write("Input: ");
 
             input = Console.ReadLine();
 
@@ -1404,7 +1398,10 @@ namespace Project_B
         public static void ShowDailyRevenue(int i)
         {
             string input;
-            Console.WriteLine($"This is the daily revenue: \r\n");
+            var currentDailyRevenue = File.ReadAllText(@"DailyRevenue.json");
+            var JObject1 = JObject.Parse(currentDailyRevenue);
+            var DailyRevenue = JObject1.SelectToken("$.DailyRevenue").Value<int>();
+            Console.WriteLine($"Today's revenue is ${DailyRevenue}.\r\n");
             Console.WriteLine("Press 1: Back");
             Console.Write("Input: ");
 
@@ -1420,7 +1417,7 @@ namespace Project_B
                         {
                             Manager();
                             break;
-                        } 
+                        }
                         else
                         {
                             Employee();
@@ -1428,6 +1425,37 @@ namespace Project_B
                         }
                     }
             }
+        }
+
+        public static void IncrDailyRevenue(int i)
+        {
+            //Opening JSON file that needs to be modified
+            var currentDailyRevenue = File.ReadAllText(@"DailyRevenue.json");
+            dynamic DailyRevenue = JsonConvert.DeserializeObject(currentDailyRevenue);
+
+            //Adding the revenue
+            DailyRevenue[@"DailyRevenue"] += i;
+
+            //Saving and Closing JSON file
+            string output = JsonConvert.SerializeObject(DailyRevenue, Formatting.Indented);
+            File.WriteAllText("DailyRevenue.json", output);
+
+            Console.Clear();
+            BeginMenu();
+        }
+
+        public static void ResetRevenue()
+        {
+            //Opening JSON file that needs to be modified
+            var currentDailyRevenue = File.ReadAllText(@"DailyRevenue.json");
+            dynamic DailyRevenue = JsonConvert.DeserializeObject(currentDailyRevenue);
+
+            //Adding the revenue
+            DailyRevenue[@"DailyRevenue"] = 0;
+
+            //Saving and Closing JSON file
+            string output = JsonConvert.SerializeObject(DailyRevenue, Formatting.Indented);
+            File.WriteAllText("DailyRevenue.json", output);
         }
     }
 }
