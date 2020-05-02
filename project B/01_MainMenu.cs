@@ -195,7 +195,7 @@ namespace Project_B
 
         public static void AddMovie()
         {
-            // UNDER PROGRESS @Patryk
+            // json file should be updated @issie
             var JsonString = File.ReadAllText(@"List.json");
             var JObject1 = JObject.Parse(JsonString);
             Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
