@@ -12,10 +12,9 @@ namespace Project_B
     class MainMenu
     {
         static void Main(string[] args)
-        {   
-            // Sets Revenue to 0
+        {
+            ResetSeats();
             ResetRevenue();
-            // Begin Program
             BeginMenu();
         }
 
@@ -426,54 +425,30 @@ namespace Project_B
         {
             // Choose Seat Console Text
             string input;
-            Console.WriteLine("\n       Selected Movie: " + movie);
-            Console.WriteLine("\n         Seats ");
+            Console.WriteLine("\nSelected Movie: " + movie);
+            Console.WriteLine("\nAvailable Seats:");
 
-            // Show all Seats
-            string showSeats = "    ";
-            string[] seats = new string[hall];
+            var JObject1 = JObject.Parse(File.ReadAllText(@"Seats.json"));
+            var seats = JObject1.SelectToken($"$.SeatsHall{hall}").Values<string>().ToList();
+            PrintSeats(hall);
 
-            //Different Halls
-            if (hall == 1)
-            {
-                seats = new string[150];
-            }
-            if (hall == 2)
-            {
-                seats = new string[300];
-            }
-            if (hall == 3)
-            {
-                seats = new string[500];
-            }
-            // End Different Hall
-
-            for (int z = 0; z < seats.Length; z++)
-            {
-                seats[z] = "" + (z + 1);  // puts number in aray
-                Console.Write(z + 1 + " ");  // writes seatnumber on console
-                if ((z + 1) % 10 == 0)
-                {
-                    Console.WriteLine("\n"); // every 10 seats new line
-                }
-            }
             // End Show all Seats
 
             // Colored Selected Seats
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("     " + error + "\n\n");
+            Console.WriteLine("\n\n     " + error);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("     Currently selected seats:");
+            Console.WriteLine("\n     Currently selected seats:");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("    " + selectedSeats);
             Console.ForegroundColor = ConsoleColor.Gray;
             // End Colored Selected Seats
 
-            Console.WriteLine("\n\n     Press 1: Choose Seat");
-            Console.WriteLine("     Press 2: Reset");
-            Console.WriteLine("     Press 3: Pay");
-            Console.WriteLine("     Press 4: Back");
-            Console.Write("\n       Input: ");
+            Console.WriteLine("\n\nPress 1: Choose Seat");
+            Console.WriteLine("Press 2: Reset");
+            Console.WriteLine("Press 3: Pay");
+            Console.WriteLine("Press 4: Back");
+            Console.Write("\nInput: ");
 
             // User Input
             input = Console.ReadLine();
@@ -491,17 +466,27 @@ namespace Project_B
                         Console.Write("\n\n     Choose Seat: ");
                         seatNumber = Console.ReadLine();
                         seatNumberINT = Convert.ToInt32(seatNumber);
+
                         //End User Input
 
-                        // Checker
+                        // Check if seat exist
+                        if (seatNumberINT > seats.Count || seatNumberINT <= 0)
+                        {
+                            error = "Error, seat does not exist.";
+                            Console.Clear();
+                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max);
+                            break;
+                        }
+
                         // Check if value exists
-                        if (selectedSeatsArray.Contains("" + seatNumber))
+                        else if (seatNumber + "R" == seats[seatNumberINT - 1])
                         {
                             error = "Seat already selected.";
                             Console.Clear();
                             ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max);
                             break;
                         }
+
                         // Check if max amount of seats does not exceed 5
                         else if (max <= 0)
                         {
@@ -510,18 +495,18 @@ namespace Project_B
                             ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max);
                             break;
                         }
-                        // Check if seat exist
-                        else if (seatNumberINT > seats.Length)
-                        {
-                            error = "Error, seat does not exist.";
-                            Console.Clear();
-                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max);
-                            break;
-                        }
                         else
                         {
-                            selectedSeatsArray[max - 1] = "" + seatNumber;
                             selectedSeats += seatNumber + " ";
+                            dynamic jsonSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
+                            jsonSeats[$"SelectedSeats"][max - 1] = seatNumber;
+                            string output = JsonConvert.SerializeObject(jsonSeats, Formatting.Indented);
+                            File.WriteAllText(@"Seats.json", output);
+
+                            jsonSeats[$"SeatsHall{hall}"][seatNumberINT - 1] = seatNumber + "R";
+                            string output1 = JsonConvert.SerializeObject(jsonSeats, Formatting.Indented);
+                            File.WriteAllText(@"Seats.json", output1);
+
                             Console.Clear();
                             ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, null, max - 1);
                             break;
@@ -531,18 +516,21 @@ namespace Project_B
                 case "2":
                     {
                         Console.Clear();
+                        ResetSelectedSeats(hall);
                         ChooseSeat(hall, movie, previousScreen, null, new string[5], null, 5);
                         break;
                     }
                 case "3":
                     {
                         Console.Clear();
+                        ResetSelectedSeats();
                         Payment();
                         break;
                     }
                 case "4":
                     {
                         Console.Clear();
+                        ResetSelectedSeats(hall);
                         MovieList(previousScreen);
                         break;
                     }
@@ -1134,14 +1122,11 @@ namespace Project_B
 
         public static void IncrDailyRevenue(int i)
         {
-            //Opening JSON file that needs to be modified
             var currentDailyRevenue = File.ReadAllText(@"DailyRevenue.json");
             dynamic DailyRevenue = JsonConvert.DeserializeObject(currentDailyRevenue);
 
-            //Adding the revenue
             DailyRevenue[@"DailyRevenue"] += i;
 
-            //Saving and Closing JSON file
             string output = JsonConvert.SerializeObject(DailyRevenue, Formatting.Indented);
             File.WriteAllText("DailyRevenue.json", output);
 
@@ -1151,18 +1136,134 @@ namespace Project_B
 
         public static void ResetRevenue()
         {
-            //Opening JSON file that needs to be modified
             var currentDailyRevenue = File.ReadAllText(@"DailyRevenue.json");
             dynamic DailyRevenue = JsonConvert.DeserializeObject(currentDailyRevenue);
 
-            //Adding the revenue
             DailyRevenue[@"DailyRevenue"] = 0;
 
-            //Saving and Closing JSON file
             string output = JsonConvert.SerializeObject(DailyRevenue, Formatting.Indented);
             File.WriteAllText("DailyRevenue.json", output);
         }
 
+        public static void ResetSeats()
+        {
+            for (int i = 5; i > 0; i--)
+            {
+                dynamic jsonSelectedSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
+                jsonSelectedSeats[$"SelectedSeats"][i - 1] = "0";
+                string output1 = JsonConvert.SerializeObject(jsonSelectedSeats, Formatting.Indented);
+                File.WriteAllText(@"Seats.json", output1);
+            }
+
+            for (int i = 1; i <= 150; i++)
+            {
+                dynamic jsonSeatsHall1 = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
+                jsonSeatsHall1[$"SeatsHall1"][i - 1] = i + "";
+                string output = JsonConvert.SerializeObject(jsonSeatsHall1, Formatting.Indented);
+                File.WriteAllText(@"Seats.json", output);
+            }
+
+            for (int i = 1; i <= 300; i++)
+            {
+                dynamic jsonSeatsHall2 = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
+                jsonSeatsHall2[$"SeatsHall2"][i - 1] = i + "";
+                string output = JsonConvert.SerializeObject(jsonSeatsHall2, Formatting.Indented);
+                File.WriteAllText(@"Seats.json", output);
+            }
+
+            for (int i = 1; i <= 500; i++)
+            {
+                dynamic jsonSeatsHall3 = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
+                jsonSeatsHall3[$"SeatsHall3"][i - 1] = i + "";
+                string output = JsonConvert.SerializeObject(jsonSeatsHall3, Formatting.Indented);
+                File.WriteAllText(@"Seats.json", output);
+            }
+        }
+
+        public static void ResetSelectedSeats(int hall)
+        {
+            var JObject1 = JObject.Parse(File.ReadAllText(@"Seats.json"));
+            var seats = JObject1.SelectToken($"$.SeatsHall{hall}").Values<string>().ToList();
+            var selectedSeatsList = JObject1.SelectToken($"$.SelectedSeats").Values<string>().ToList();
+
+            foreach (string selectedSeat in selectedSeatsList)
+            {
+                int selectedSeatInt = Convert.ToInt32(selectedSeat);
+                string chosenSeat = selectedSeat + "R";
+                if (selectedSeatInt > 0 && chosenSeat == seats[selectedSeatInt - 1])
+                {
+                    dynamic jsonReservedSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
+                    jsonReservedSeats[$"SeatsHall{hall}"][selectedSeatInt - 1] = selectedSeat;
+                    string output = JsonConvert.SerializeObject(jsonReservedSeats, Formatting.Indented);
+                    File.WriteAllText(@"Seats.json", output);
+                }
+            }
+
+            ResetSelectedSeats();
+        }
+
+        public static void ResetSelectedSeats()
+        {
+            for (int i = 5; i > 0; i--)
+            {
+                dynamic jsonSelectedSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
+                jsonSelectedSeats[$"SelectedSeats"][i - 1] = "0";
+                string output1 = JsonConvert.SerializeObject(jsonSelectedSeats, Formatting.Indented);
+                File.WriteAllText(@"Seats.json", output1);
+            }
+        }
+
+        public static void PrintSeats(int hall)
+        {
+            int maxSeats = 0;
+            if (hall == 1)
+            {
+                maxSeats = 150;
+            }
+            else if (hall == 2)
+            {
+                maxSeats = 300;
+            }
+            else if (hall == 3)
+            {
+                maxSeats = 500;
+            }
+
+            var JObject1 = JObject.Parse(File.ReadAllText(@"Seats.json"));
+            var seats = JObject1.SelectToken($"$.SeatsHall{hall}").Values<string>().ToList();
+
+            for (int z = 0; z < maxSeats; z++)
+            {
+                if (z % 10 == 0 && z < 10)
+                {
+                    Console.WriteLine(new string(' ', 25));
+                    Console.Write(new string(' ', 25));
+                }
+
+                if (z % 10 == 0 && z < 100 && z >= 10)
+                {
+                    Console.WriteLine(new string(' ', 20));
+                    Console.Write(new string(' ', 20));
+                }
+
+                if (z % 10 == 0 && z >= 100)
+                {
+                    Console.WriteLine(new string(' ', 15));
+                    Console.Write(new string(' ', 15));
+                }
+
+                if (seats[z] == z + 1 + "R")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(z + 1 + " ");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.Write(seats[z] + " ");
+                }
+            }
+        }
     }
 }
 
