@@ -36,13 +36,13 @@ namespace Project_B
             {
                 case "1":
                     {
-                        CustomerMenu();
+                        LoginScreen();
                         break;
                     }
 
                 case "2":
                     {
-                        StaffMenu();
+                        LoginScreen();
                         break;
                     }
 
@@ -53,8 +53,60 @@ namespace Project_B
                     }
             }
         }
+        public static void LoginScreen()
+        {
+            Console.WriteLine("Hello , Enter you're username");
+            Console.Write("username : ");
+            string inputUsername = Console.ReadLine();
+            Console.WriteLine("Now enter you password");
+            Console.Write("password : ");
+            string inputpassWord = Console.ReadLine();
+            var JObject1 = JObject.Parse(File.ReadAllText(@"Supertest.json"));
+            var account1 = JObject1.SelectToken("$.Tom").Value<string>();
+            var account2 = JObject1.SelectToken("$.Feuzi").Value<string>();
+            var account3 = JObject1.SelectToken("$.Jordi").Value<string>();
+            var account4 = JObject1.SelectToken("$.Ismail").Value<string>();
+            var account5 = JObject1.SelectToken("$.Patryck").Value<string>();
+            if (inputpassWord == account1)
+            {
+                
+                Console.Clear();
+                Console.WriteLine("You have logged in.");
+                CustomerMenu();
+            }
+            else if (inputpassWord == account2)
+            {
+                Console.Clear();
+                Console.WriteLine("You have logged in.");
+                CustomerMenu();
+            }
+            else if (inputpassWord == account3)
+            {
+                Console.Clear();
+                Console.WriteLine("You have logged in.");
+                CustomerMenu();
+            }
+            else if (inputpassWord == account4)
+            {
+                Console.Clear();
+                Console.WriteLine("You have logged in.");
+                StaffMenu();
+            }
+            else if (inputpassWord == account5)
+            {
+                Console.Clear();
+                Console.WriteLine("You have logged in.");
+                StaffMenu();
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("You have enterd wrong username/password. ");
+                LoginScreen();
 
-        public static void CustomerMenu()
+            }
+        }
+            public static void CustomerMenu()
         {
             string OPT2;
             Console.WriteLine("Welcome customer, what would you like to do?");
@@ -776,7 +828,7 @@ namespace Project_B
 
             if (num2 == 1)
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[0]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
@@ -812,7 +864,7 @@ namespace Project_B
 
             if (num2 == 2)
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[1]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
@@ -849,7 +901,7 @@ namespace Project_B
 
             if (num2 == 3)
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[2]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
@@ -885,7 +937,7 @@ namespace Project_B
 
             if (num2 == 4)
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[3]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
@@ -921,7 +973,7 @@ namespace Project_B
 
             if (num2 == 5)
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[4]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
@@ -957,7 +1009,7 @@ namespace Project_B
 
             if (num2 == 6)
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+               
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[5]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
@@ -1110,6 +1162,7 @@ namespace Project_B
             string output = JsonConvert.SerializeObject(DailyRevenue, Formatting.Indented);
             File.WriteAllText("DailyRevenue.json", output);
         }
+
     }
 }
 
