@@ -837,7 +837,10 @@ namespace Project_B
                     }
                     else
                     {
+                        
+                        Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
+                        Payment();
                     }
 
 
@@ -846,7 +849,9 @@ namespace Project_B
                 }
                 else
                 {
-                    Console.WriteLine("you did not type the enter button :/");
+                    Console.Clear();
+                    Console.WriteLine("you did not press enter :/");
+                    Payment();
                 }
             }
 
@@ -873,7 +878,9 @@ namespace Project_B
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
+                        Payment();
                     }
 
 
@@ -883,7 +890,9 @@ namespace Project_B
                 }
                 else
                 {
-                    Console.WriteLine("you did not type the enter button :/");
+                     Console.Clear();
+                     Console.WriteLine("you did not press enter :/");
+                     Payment();
                 }
             }
 
@@ -910,7 +919,9 @@ namespace Project_B
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
+                        Payment();
                     }
 
 
@@ -919,7 +930,9 @@ namespace Project_B
                 }
                 else
                 {
-                    Console.WriteLine("you did not type the enter button :/");
+                    Console.Clear();
+                    Console.WriteLine("you did not press enter :/");
+                    Payment();
                 }
             }
 
@@ -946,7 +959,9 @@ namespace Project_B
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
+                        Payment();
                     }
 
 
@@ -955,7 +970,10 @@ namespace Project_B
                 }
                 else
                 {
-                    Console.WriteLine("you did not type the enter button :/");
+
+                    Console.Clear();
+                    Console.WriteLine("you did not press enter :/");
+                    Payment();
                 }
             }
 
@@ -982,7 +1000,9 @@ namespace Project_B
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
+                        Payment();
                     }
 
 
@@ -991,7 +1011,10 @@ namespace Project_B
                 }
                 else
                 {
-                    Console.WriteLine("you did not type the enter button :/");
+
+                    Console.Clear();
+                    Console.WriteLine("you did not press enter :/");
+                    Payment();
                 }
             }
 
@@ -1018,7 +1041,9 @@ namespace Project_B
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
+                        Payment();
                     }
 
 
@@ -1027,7 +1052,10 @@ namespace Project_B
                 }
                 else
                 {
-                    Console.WriteLine("you did not type the enter button :/");
+
+                    Console.Clear();
+                    Console.WriteLine("you did not press enter :/");
+                    Payment();
                 }
             }
         }
