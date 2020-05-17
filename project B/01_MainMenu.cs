@@ -68,7 +68,7 @@ namespace Project_B
             var account5 = JObject1.SelectToken("$.Patryck").Value<string>();
             if (inputpassWord == account1)
             {
-                
+
                 Console.Clear();
                 Console.WriteLine("You have logged in.");
                 CustomerMenu();
@@ -105,7 +105,7 @@ namespace Project_B
 
             }
         }
-            public static void CustomerMenu()
+        public static void CustomerMenu()
         {
             string OPT2;
             Console.WriteLine("Welcome customer, what would you like to do?");
@@ -122,7 +122,7 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieList(1);
+                        MovieType();
                         break;
                     }
                 case "2":
@@ -186,7 +186,7 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieList(2);
+                        MovieType();
                         break;
                     }
                 case "2":
@@ -223,7 +223,7 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieList(3);
+                        MovieType();
                         break;
                     }
                 case "2":
@@ -258,7 +258,7 @@ namespace Project_B
                 Console.WriteLine(myList[i].ToString());
             }
             Console.WriteLine("-------------------------------");
-            
+
 
             string input;
             Console.WriteLine("\n\n");
@@ -320,6 +320,40 @@ namespace Project_B
                     {
                         Console.Clear();
                         StaffMenu();
+                        break;
+                    }
+            }
+        }
+
+        public static void MovieType()
+        {
+            string OPT;
+            Console.WriteLine("Please choose an option to continue:");
+            Console.WriteLine("1. 2D");
+            Console.WriteLine("2. 3D");
+            Console.WriteLine("3. IMAX");
+            Console.Write("Input: ");
+
+            OPT = Console.ReadLine().ToLower();
+            Console.Clear();
+
+            switch (OPT)
+            {
+                case "1":
+                    {
+                        MovieList(1);
+                        break;
+                    }
+
+                case "2":
+                    {
+                        MovieList(1);
+                        break;
+                    }
+
+                case "3":
+                    {
+                        MovieList(1);
                         break;
                     }
             }
@@ -538,7 +572,7 @@ namespace Project_B
             // End User Input Oucome
         }
         //End Choose Seat
-        public static void venuedate(int MViD,int previousScreen)
+        public static void venuedate(int MViD, int previousScreen)
         {
             Tuple<int, string>[] VenueMVlist = new Tuple<int, string>[10];
             string[] MVList = new string[10] { "Jumanji", "Harry Potter", "Ride Along 2", "Spencer Confidential", "Fast & Furious", "6 Underground", "Deadpool 2", "Death at a Funeral", "Rush hour 3", "The Dark Knight" };
@@ -548,7 +582,7 @@ namespace Project_B
                 {
                     VenueMVlist[i] = Tuple.Create(1, MVList[i]);
                 }
-                else if(i < 6)
+                else if (i < 6)
                 {
                     VenueMVlist[i] = Tuple.Create(2, MVList[i]);
                 }
@@ -556,9 +590,9 @@ namespace Project_B
                 {
                     VenueMVlist[i] = Tuple.Create(3, MVList[i]);
                 }
-               
+
             }
-            string[] mvTimes = new string[5] { "Wednesday: 11:30 - 16:00 - 19:00 ", "Thursday: 11:30 - 16:00 - 19:00", "Tuesday:  11:30 - 16:00 - 19:00", "Monday: 11:30 - 16:00 - 19:00", "Friday: 11:30 - 16:00 - 19:00"};
+            string[] mvTimes = new string[5] { "Wednesday: 11:30 - 16:00 - 19:00 ", "Thursday: 11:30 - 16:00 - 19:00", "Tuesday:  11:30 - 16:00 - 19:00", "Monday: 11:30 - 16:00 - 19:00", "Friday: 11:30 - 16:00 - 19:00" };
             Tuple<string, string>[] VnDate1 = new Tuple<string, string>[5];
             Tuple<string, string>[] VnDate2 = new Tuple<string, string>[5];
             Tuple<string, string>[] VnDate3 = new Tuple<string, string>[5];
@@ -589,11 +623,11 @@ namespace Project_B
                 Console.WriteLine(TL);
                 Console.Write("Input:");
                 Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue1/11:30" ||Choice == "venue1/16:00" ||Choice == "venue1/19:00")
+                if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
                     ChooseSeat(1, "Jumanji", previousScreen, null, new string[5], null, 5);
                 }
-                else if (Choice == "venue3/11:30" ||Choice == "venue3/16:00" ||Choice == "venue3/19:00")
+                else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
                     ChooseSeat(3, "Jumanji", previousScreen, null, new string[5], null, 5);
                 }
@@ -614,11 +648,11 @@ namespace Project_B
                 Console.WriteLine(TL);
                 Console.Write("Input:");
                 Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue1/11:30" ||Choice ==  "venue1/16:00" ||Choice == "venue1/19:00")
+                if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
                     ChooseSeat(1, "Harry Potter", previousScreen, null, new string[5], null, 5);
                 }
-                else if (Choice == "venue2/11:30" ||Choice == "venue2/16:00" || Choice == "venue2/19:00")
+                else if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
                     ChooseSeat(2, "Harry Potter", previousScreen, null, new string[5], null, 5);
                 }
@@ -638,11 +672,11 @@ namespace Project_B
                 Console.WriteLine(TL);
                 Console.Write("Input:");
                 Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue2/11:30" ||Choice == "venue2/16:00" ||Choice == "venue2/19:00")
+                if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
                     ChooseSeat(2, "Ride Along 2", previousScreen, null, new string[5], null, 5);
                 }
-                else if (Choice == "venue3/11:30" ||Choice ==  "venue3/16:00" ||Choice == "venue3/19:00")
+                else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
                     ChooseSeat(3, "Ride Along 2", previousScreen, null, new string[5], null, 5);
                 }
@@ -661,7 +695,7 @@ namespace Project_B
                 Console.WriteLine(TL);
                 Console.Write("Input:");
                 Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue1/11:30" ||Choice ==  "venue1/16:00" ||Choice ==  "venue1/19:00")
+                if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
                     ChooseSeat(1, "Spencer Confidential", previousScreen, null, new string[5], null, 5);
                 }
@@ -681,11 +715,11 @@ namespace Project_B
                 Console.WriteLine(TL);
                 Console.Write("Input:");
                 Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue2/11:30" ||Choice ==  "venue2/16:00" ||Choice ==  "venue2/19:00")
+                if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
                     ChooseSeat(2, "Fast & Furious", previousScreen, null, new string[5], null, 5);
                 }
-                else if (Choice == "venue3/11:30" ||Choice ==  "venue3/16:00" ||Choice ==  "venue3/19:00")
+                else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
                     ChooseSeat(3, "Fast & Furious", previousScreen, null, new string[5], null, 5);
                 }
@@ -704,7 +738,7 @@ namespace Project_B
                 Console.WriteLine(TL);
                 Console.Write("Input:");
                 Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue1/11:30" ||Choice == "venue1/16:00" ||Choice == "venue1/19:00")
+                if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
                     ChooseSeat(1, "6 Underground", previousScreen, null, new string[5], null, 5);
                 }
@@ -723,7 +757,7 @@ namespace Project_B
                 Console.WriteLine(TL);
                 Console.Write("Input:");
                 Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue2/11:30" ||Choice ==  "venue2/16:00" ||Choice ==  "venue2/19:00")
+                if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
                     ChooseSeat(2, "Deadpool 2", previousScreen, null, new string[5], null, 5);
                 }
@@ -742,7 +776,7 @@ namespace Project_B
                 Console.WriteLine(TL);
                 Console.Write("Input:");
                 Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue1/11:30" || Choice == "venue1/16:00" ||Choice == "venue1/19:00")
+                if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
                     ChooseSeat(1, "Death at a Funeral", previousScreen, null, new string[5], null, 5);
                 }
@@ -762,11 +796,11 @@ namespace Project_B
                 Console.WriteLine(TL);
                 Console.Write("Input:");
                 Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue2/11:30" || Choice == "venue2/16:00" ||Choice == "venue2/19:00")
+                if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
                     ChooseSeat(2, "Rush Hour 3", previousScreen, null, new string[5], null, 5);
                 }
-                else if (Choice == "venue3/11:30" ||Choice == "venue3/16:00" ||Choice == "venue3/19:00")
+                else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
                     ChooseSeat(3, "Rush Hour 3", previousScreen, null, new string[5], null, 5);
                 }
@@ -785,7 +819,7 @@ namespace Project_B
                 Console.WriteLine(TL);
                 Console.Write("Input:");
                 Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue3/11:30" ||Choice == "venue3/16:00" ||Choice ==  "venue3/19:00")
+                if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
                     ChooseSeat(3, "The Dark Knight", previousScreen, null, new string[5], null, 5);
                 }
@@ -816,7 +850,7 @@ namespace Project_B
 
             if (num2 == 1)
             {
-                
+
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[0]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
@@ -837,7 +871,7 @@ namespace Project_B
                     }
                     else
                     {
-                        
+
                         Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
                         Payment();
@@ -857,7 +891,7 @@ namespace Project_B
 
             if (num2 == 2)
             {
-                
+
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[1]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
@@ -890,15 +924,15 @@ namespace Project_B
                 }
                 else
                 {
-                     Console.Clear();
-                     Console.WriteLine("you did not press enter :/");
-                     Payment();
+                    Console.Clear();
+                    Console.WriteLine("you did not press enter :/");
+                    Payment();
                 }
             }
 
             if (num2 == 3)
             {
-                
+
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[2]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
@@ -938,7 +972,7 @@ namespace Project_B
 
             if (num2 == 4)
             {
-                
+
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[3]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
@@ -979,7 +1013,7 @@ namespace Project_B
 
             if (num2 == 5)
             {
-                
+
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[4]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
@@ -1020,7 +1054,7 @@ namespace Project_B
 
             if (num2 == 6)
             {
-               
+
                 Console.WriteLine("You have chosen paymentmehod  " + paymentMethods[5]);
                 Console.WriteLine("press Enter to continue to the payment page");
                 ConsoleKeyInfo keyInfo;
