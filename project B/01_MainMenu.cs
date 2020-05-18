@@ -13,8 +13,8 @@ namespace Project_B
     {
         static void Main(string[] args)
         {
-            ResetSeats();
-            ResetRevenue();
+            SeatOptions.ResetSeats();
+            PaymentSettings.ResetRevenue();
             BeginMenu();
         }
 
@@ -35,7 +35,7 @@ namespace Project_B
             {
                 case "1":
                     {
-                        LoginScreen();
+                        CustomerMenu();
                         break;
                     }
 
@@ -122,12 +122,12 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieType();
+                        MovieOptions.MovieType();
                         break;
                     }
                 case "2":
                     {
-                        Offers();
+                        PaymentSettings.Offers();
                         break;
                     }
                 case "3":
@@ -186,12 +186,12 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieType();
+                        MovieOptions.MovieType();
                         break;
                     }
                 case "2":
                     {
-                        ShowDailyRevenue(1);
+                        PaymentSettings.ShowDailyRevenue(1);
                         break;
                     }
                 case "3":
@@ -223,17 +223,17 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieType();
+                        MovieOptions.MovieType();
                         break;
                     }
                 case "2":
                     {
-                        AddMovie();
+                        MovieOptions.AddMovie();
                         break;
                     }
                 case "3":
                     {
-                        ShowDailyRevenue(2);
+                        PaymentSettings.ShowDailyRevenue(2);
                         break;
                     }
                 case "4":
@@ -244,6 +244,35 @@ namespace Project_B
             }
         }
 
+        public static void AboutUs()
+        {
+            string input;
+            Console.WriteLine("About Us\r\n");
+            Console.WriteLine("CinemaWorld has 3 venues with a capacity of 150, 300 and 500 seats respectively.\r\n" +
+                              "The team consist of the owner, Jake Darcy, the ticket office clerk, Art Brown, and Sally Buns.\r\n" +
+                              "Jake is a film aficionado pur sang. He watches all movies and knows most actors and their histories by heart.\r\n" +
+                              "He writes reviews of films in several magazines.This cinema is a dream come true for him, and the first in a great chain of cinemas to be. \r\n" +
+                              "Art welcomes the customers and checks their tickets or reservations.\r\n" +
+                              "He needs to be the face of the cinema experience.\r\n" +
+                              "Sally Buns runs the theaters café and bar on a franchise basis.\r\n");
+            Console.WriteLine("Press 1: Back");
+            Console.Write("Input: ");
+
+            input = Console.ReadLine();
+
+            Console.Clear();
+
+            switch (input)
+            {
+                case "1":
+                    {
+                        CustomerMenu();
+                        break;
+                    }
+            }
+        }
+    }
+    class MovieOptions {
         public static void AddMovie()
         {
             // json file should be updated @issie
@@ -319,7 +348,7 @@ namespace Project_B
                 case "3":
                     {
                         Console.Clear();
-                        StaffMenu();
+                        MainMenu.StaffMenu();
                         break;
                     }
             }
@@ -360,7 +389,7 @@ namespace Project_B
         }
         // End Main Menu
         //Choose Movie
-        private static void MovieList(int previousScreen)
+        public static void MovieList(int previousScreen)
         {
             var JsonString = File.ReadAllText(@"List.json");
             var JObject1 = JObject.Parse(JsonString);
@@ -384,76 +413,78 @@ namespace Project_B
             {
                 case "1":
                     {
-                        venuedate(1, previousScreen);//Moet doorgeven aan VenueAndDate met movie ID en String met de naam van de film
+                        Venue.venuedate(1, previousScreen);//Moet doorgeven aan VenueAndDate met movie ID en String met de naam van de film
                         break;
                     }
                 case "2":
                     {
-                        venuedate(2, previousScreen);
+                        Venue.venuedate(2, previousScreen);
                         break;
                     }
                 case "3":
                     {
-                        venuedate(3, previousScreen);
+                        Venue.venuedate(3, previousScreen);
                         break;
                     }
                 case "4":
                     {
-                        venuedate(4, previousScreen);
+                        Venue.venuedate(4, previousScreen);
                         break;
                     }
                 case "5":
                     {
-                        venuedate(5, previousScreen);
+                        Venue.venuedate(5, previousScreen);
                         break;
                     }
                 case "6":
                     {
-                        venuedate(6, previousScreen);
+                        Venue.venuedate(6, previousScreen);
                         break;
                     }
                 case "7":
                     {
-                        venuedate(7, previousScreen);
+                        Venue.venuedate(7, previousScreen);
                         break;
                     }
                 case "8":
                     {
-                        venuedate(8, previousScreen);
+                        Venue.venuedate(8, previousScreen);
                         break;
                     }
                 case "9":
                     {
-                        venuedate(9, previousScreen);
+                        Venue.venuedate(9, previousScreen);
                         break;
                     }
                 case "10":
                     {
-                        venuedate(10, previousScreen);
+                        Venue.venuedate(10, previousScreen);
                         break;
                     }
                 case "11":
                     {
                         if (previousScreen == 1)
                         {
-                            CustomerMenu();
+                            MainMenu.CustomerMenu();
                             break;
                         }
                         if (previousScreen == 2)
                         {
-                            Manager();
+                            MainMenu.Manager();
                             break;
                         }
                         if (previousScreen == 3)
                         {
-                            Employee();
+                            MainMenu.Employee();
                             break;
                         }
                         break;
                     }
             }
         }
-
+    }
+    class SeatOptions
+    {
         //Choose Seat
         public static void ChooseSeat(int hall, string movie, int previousScreen, string selectedSeats, string[] selectedSeatsArray, string error, int max)
         {
@@ -558,114 +589,236 @@ namespace Project_B
                     {
                         Console.Clear();
                         ResetSelectedSeats();
-                        Payment();
+                        PaymentSettings.Payment();
                         break;
                     }
                 case "4":
                     {
                         Console.Clear();
                         ResetSelectedSeats(hall);
-                        MovieList(previousScreen);
+                        MovieOptions.MovieList(previousScreen);
                         break;
                     }
             }
             // End User Input Oucome
         }
         //End Choose Seat
-        public static void VenueAndDate(int MViD,string MovieName,int previousScreen)//Dit is de nieuwe Venue and Date
+
+        public static void ResetSeats()
         {
-            string[] movieDays = new string[5];
-            movieDays[0] = "Monday";
-            movieDays[1] = "Tuesday";
-            movieDays[2] = "Wednesday";
-            movieDays[3] = "Thursday";
-            movieDays[4] = "Friday";
-            string[] movieTimes = new string[4];
-            movieTimes[0] = "15:00";
-            movieTimes[1] = "17:00";
-            movieTimes[2] = "19:00";
-            movieTimes[3] = "21:00";
-            movieTimes[4] = "23:00";
-            string[] MvDTime = new string[(movieDays.Length * movieTimes.Length)];
-            int counterD = 0;
-            int counterT = 0;
-            for(int i = 0; i < MvDTime.Length; i++)
+            for (int i = 5; i > 0; i--)
             {
-                if(counterD > 4)
+                dynamic jsonSelectedSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
+                jsonSelectedSeats[$"SelectedSeats"][i - 1] = "0";
+                string output1 = JsonConvert.SerializeObject(jsonSelectedSeats, Formatting.Indented);
+                File.WriteAllText(@"Seats.json", output1);
+            }
+
+            dynamic jsonSeatsHalls = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
+            for (int i = 1; i <= 500; i++)
+            {
+                if (i <= 150)
                 {
-                    counterD = 0;
+                    jsonSeatsHalls[$"SeatsHall1"][i - 1] = i + "";
+                    jsonSeatsHalls[$"SeatsHall2"][i - 1] = i + "";
+                    jsonSeatsHalls[$"SeatsHall3"][i - 1] = i + "";
+
                 }
-                if(counterT > 4)
+                if (i > 150 && i <= 300)
                 {
-                    counterT = 0;
-                    counterD++;
+                    jsonSeatsHalls[$"SeatsHall2"][i - 1] = i + "";
+                    jsonSeatsHalls[$"SeatsHall3"][i - 1] = i + "";
                 }
-                MvDTime[i] = movieDays[counterD] + " / " + movieTimes[counterT];
-                counterT++;
+                if (i > 300 && i <= 500)
+                {
+                    jsonSeatsHalls[$"SeatsHall3"][i - 1] = i + "";
+                }
             }
-            if (MViD == 1)
+            string output = JsonConvert.SerializeObject(jsonSeatsHalls, Formatting.Indented);
+            File.WriteAllText(@"Seats.json", output);
+        }
+
+        public static void ResetSelectedSeats(int hall)
+        {
+            var JObject1 = JObject.Parse(File.ReadAllText(@"Seats.json"));
+            var seats = JObject1.SelectToken($"$.SeatsHall{hall}").Values<string>().ToList();
+            var selectedSeatsList = JObject1.SelectToken($"$.SelectedSeats").Values<string>().ToList();
+
+            foreach (string selectedSeat in selectedSeatsList)
             {
-                VnDFrontend(MovieName, MvDTime[0], MvDTime[24], MvDTime[10], previousScreen);
+                int selectedSeatInt = Convert.ToInt32(selectedSeat);
+                string chosenSeat = selectedSeat + "R";
+                if (selectedSeatInt > 0 && chosenSeat == seats[selectedSeatInt - 1])
+                {
+                    dynamic jsonReservedSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
+                    jsonReservedSeats[$"SeatsHall{hall}"][selectedSeatInt - 1] = selectedSeat;
+                    string output = JsonConvert.SerializeObject(jsonReservedSeats, Formatting.Indented);
+                    File.WriteAllText(@"Seats.json", output);
+                }
             }
-            if (MViD == 2)
+
+            ResetSelectedSeats();
+        }
+
+        public static void ResetSelectedSeats()
+        {
+            for (int i = 5; i > 0; i--)
             {
-                VnDFrontend(MovieName, MvDTime[24], MvDTime[3], MvDTime[15], previousScreen);
+                dynamic jsonSelectedSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
+                jsonSelectedSeats[$"SelectedSeats"][i - 1] = "0";
+                string output1 = JsonConvert.SerializeObject(jsonSelectedSeats, Formatting.Indented);
+                File.WriteAllText(@"Seats.json", output1);
             }
-            if (MViD == 3)
+        }
+
+        public static void PrintSeats(int hall)
+        {
+            int maxSeats = 0;
+            if (hall == 1)
             {
-                VnDFrontend(MovieName, MvDTime[2], MvDTime[22], MvDTime[0], previousScreen);
+                maxSeats = 150;
             }
-            if (MViD == 4)
+            else if (hall == 2)
             {
-                VnDFrontend(MovieName, MvDTime[12], MvDTime[6], MvDTime[24], previousScreen);
+                maxSeats = 300;
             }
-            if (MViD == 5)
+            else if (hall == 3)
             {
-                VnDFrontend(MovieName, MvDTime[5], MvDTime[13], MvDTime[1], previousScreen);
+                maxSeats = 500;
             }
-            if (MViD == 6)
+
+            var JObject1 = JObject.Parse(File.ReadAllText(@"Seats.json"));
+            var seats = JObject1.SelectToken($"$.SeatsHall{hall}").Values<string>().ToList();
+
+            for (int z = 0; z < maxSeats; z++)
             {
-                VnDFrontend(MovieName, MvDTime[19], MvDTime[14], MvDTime[10], previousScreen);
+                if (z % 10 == 0 && z < 10)
+                {
+                    Console.WriteLine(new string(' ', 25));
+                    Console.Write(new string(' ', 25));
+                }
+
+                if (z % 10 == 0 && z < 100 && z >= 10)
+                {
+                    Console.WriteLine(new string(' ', 20));
+                    Console.Write(new string(' ', 20));
+                }
+
+                if (z % 10 == 0 && z >= 100)
+                {
+                    Console.WriteLine(new string(' ', 15));
+                    Console.Write(new string(' ', 15));
+                }
+
+                if (seats[z] == z + 1 + "R")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(z + 1 + " ");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.Write(seats[z] + " ");
+                }
             }
-            if (MViD == 7)
+        }
+    }
+    class Venue
+    {
+        public static void VenueAndDate(int MViD, string MovieName, int previousScreen)//Dit is de nieuwe Venue and Date
             {
-                VnDFrontend(MovieName, MvDTime[7], MvDTime[23], MvDTime[2], previousScreen);
-            }
-            if (MViD == 8)
-            {
-                VnDFrontend(MovieName, MvDTime[22], MvDTime[10], MvDTime[3], previousScreen);
-            }
-            if (MViD == 9)
-            {
-                VnDFrontend(MovieName, MvDTime[6], MvDTime[15], MvDTime[7], previousScreen);
-            }
-            if (MViD == 10)
-            {
-                VnDFrontend(MovieName, MvDTime[23], MvDTime[0], MvDTime[22], previousScreen);
-            }
+                string[] movieDays = new string[5];
+                movieDays[0] = "Monday";
+                movieDays[1] = "Tuesday";
+                movieDays[2] = "Wednesday";
+                movieDays[3] = "Thursday";
+                movieDays[4] = "Friday";
+                string[] movieTimes = new string[4];
+                movieTimes[0] = "15:00";
+                movieTimes[1] = "17:00";
+                movieTimes[2] = "19:00";
+                movieTimes[3] = "21:00";
+                movieTimes[4] = "23:00";
+                string[] MvDTime = new string[(movieDays.Length * movieTimes.Length)];
+                int counterD = 0;
+                int counterT = 0;
+                for (int i = 0; i < MvDTime.Length; i++)
+                {
+                    if (counterD > 4)
+                    {
+                        counterD = 0;
+                    }
+                    if (counterT > 4)
+                    {
+                        counterT = 0;
+                        counterD++;
+                    }
+                    MvDTime[i] = movieDays[counterD] + " / " + movieTimes[counterT];
+                    counterT++;
+                }
+                if (MViD == 1)
+                {
+                    VnDFrontend(MovieName, MvDTime[0], MvDTime[24], MvDTime[10], previousScreen);
+                }
+                if (MViD == 2)
+                {
+                    VnDFrontend(MovieName, MvDTime[24], MvDTime[3], MvDTime[15], previousScreen);
+                }
+                if (MViD == 3)
+                {
+                    VnDFrontend(MovieName, MvDTime[2], MvDTime[22], MvDTime[0], previousScreen);
+                }
+                if (MViD == 4)
+                {
+                    VnDFrontend(MovieName, MvDTime[12], MvDTime[6], MvDTime[24], previousScreen);
+                }
+                if (MViD == 5)
+                {
+                    VnDFrontend(MovieName, MvDTime[5], MvDTime[13], MvDTime[1], previousScreen);
+                }
+                if (MViD == 6)
+                {
+                    VnDFrontend(MovieName, MvDTime[19], MvDTime[14], MvDTime[10], previousScreen);
+                }
+                if (MViD == 7)
+                {
+                    VnDFrontend(MovieName, MvDTime[7], MvDTime[23], MvDTime[2], previousScreen);
+                }
+                if (MViD == 8)
+                {
+                    VnDFrontend(MovieName, MvDTime[22], MvDTime[10], MvDTime[3], previousScreen);
+                }
+                if (MViD == 9)
+                {
+                    VnDFrontend(MovieName, MvDTime[6], MvDTime[15], MvDTime[7], previousScreen);
+                }
+                if (MViD == 10)
+                {
+                    VnDFrontend(MovieName, MvDTime[23], MvDTime[0], MvDTime[22], previousScreen);
+                }
 
 
         }
-        public static void VnDFrontend(string MovieName, string Date, string Date2, string Date3,int previousScreen)//Dit hoort bij de nieuwe venue and date
+        public static void VnDFrontend(string MovieName, string Date, string Date2, string Date3, int previousScreen)//Dit hoort bij de nieuwe venue and date
         {
             Console.WriteLine("You chose the movie: " + MovieName);
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine("This movie plays on:");
-            Console.WriteLine("1. Venue 1 " + Date + "\n" +"2. Venue 2 "+ Date2 + "\n" + "3. Venue 3 " + Date3);
+            Console.WriteLine("1. Venue 1 " + Date + "\n" + "2. Venue 2 " + Date2 + "\n" + "3. Venue 3 " + Date3);
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine("Please type in the number of your choice to continue");
             string choice = Console.ReadLine();
-            if(choice == "1")
+            if (choice == "1")
             {
-                ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5);
+                SeatOptions.ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5);
             }//De choose seat is nog niet aangepast om ook een datum aan te nemen, wanneer dat is gedaan kan hier ook de date worden meegegeven
-            if(choice == "2")
+            if (choice == "2")
             {
-                ChooseSeat(2, MovieName, previousScreen, null, new string[5], null, 5);
+                SeatOptions.ChooseSeat(2, MovieName, previousScreen, null, new string[5], null, 5);
             }
-            if(choice == "3")
+            if (choice == "3")
             {
-                ChooseSeat(3, MovieName, previousScreen, null, new string[5], null, 5);
+                SeatOptions.ChooseSeat(3, MovieName, previousScreen, null, new string[5], null, 5);
             }
 
         }
@@ -725,11 +878,11 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
-                    ChooseSeat(1, "Jumanji", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(1, "Jumanji", previousScreen, null, new string[5], null, 5);
                 }
                 else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
-                    ChooseSeat(3, "Jumanji", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(3, "Jumanji", previousScreen, null, new string[5], null, 5);
                 }
 
             }
@@ -750,11 +903,11 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
-                    ChooseSeat(1, "Harry Potter", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(1, "Harry Potter", previousScreen, null, new string[5], null, 5);
                 }
                 else if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
-                    ChooseSeat(2, "Harry Potter", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(2, "Harry Potter", previousScreen, null, new string[5], null, 5);
                 }
             }
             else if (MViD == 3)
@@ -774,11 +927,11 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
-                    ChooseSeat(2, "Ride Along 2", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(2, "Ride Along 2", previousScreen, null, new string[5], null, 5);
                 }
                 else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
-                    ChooseSeat(3, "Ride Along 2", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(3, "Ride Along 2", previousScreen, null, new string[5], null, 5);
                 }
             }
             else if (MViD == 4)
@@ -797,7 +950,7 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
-                    ChooseSeat(1, "Spencer Confidential", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(1, "Spencer Confidential", previousScreen, null, new string[5], null, 5);
                 }
             }
             else if (MViD == 5)
@@ -817,11 +970,11 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
-                    ChooseSeat(2, "Fast & Furious", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(2, "Fast & Furious", previousScreen, null, new string[5], null, 5);
                 }
                 else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
-                    ChooseSeat(3, "Fast & Furious", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(3, "Fast & Furious", previousScreen, null, new string[5], null, 5);
                 }
             }
             else if (MViD == 6)
@@ -840,7 +993,7 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
-                    ChooseSeat(1, "6 Underground", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(1, "6 Underground", previousScreen, null, new string[5], null, 5);
                 }
             }
             else if (MViD == 7)
@@ -859,7 +1012,7 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
-                    ChooseSeat(2, "Deadpool 2", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(2, "Deadpool 2", previousScreen, null, new string[5], null, 5);
                 }
             }
             else if (MViD == 8)
@@ -878,7 +1031,7 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
-                    ChooseSeat(1, "Death at a Funeral", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(1, "Death at a Funeral", previousScreen, null, new string[5], null, 5);
                 }
             }
             else if (MViD == 9)
@@ -898,11 +1051,11 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
-                    ChooseSeat(2, "Rush Hour 3", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(2, "Rush Hour 3", previousScreen, null, new string[5], null, 5);
                 }
                 else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
-                    ChooseSeat(3, "Rush Hour 3", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(3, "Rush Hour 3", previousScreen, null, new string[5], null, 5);
                 }
             }
             else if (MViD == 10)
@@ -921,10 +1074,12 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
-                    ChooseSeat(3, "The Dark Knight", previousScreen, null, new string[5], null, 5);
+                    SeatOptions.ChooseSeat(3, "The Dark Knight", previousScreen, null, new string[5], null, 5);
                 }
             }
         }
+    }
+    class PaymentSettings {
         public static void Payment()
         {
 
@@ -1194,33 +1349,7 @@ namespace Project_B
             }
         }
 
-        public static void AboutUs()
-        {
-            string input;
-            Console.WriteLine("About Us\r\n");
-            Console.WriteLine("CinemaWorld has 3 venues with a capacity of 150, 300 and 500 seats respectively.\r\n" +
-                              "The team consist of the owner, Jake Darcy, the ticket office clerk, Art Brown, and Sally Buns.\r\n" +
-                              "Jake is a film aficionado pur sang. He watches all movies and knows most actors and their histories by heart.\r\n" +
-                              "He writes reviews of films in several magazines.This cinema is a dream come true for him, and the first in a great chain of cinemas to be. \r\n" +
-                              "Art welcomes the customers and checks their tickets or reservations.\r\n" +
-                              "He needs to be the face of the cinema experience.\r\n" +
-                              "Sally Buns runs the theaters café and bar on a franchise basis.\r\n");
-            Console.WriteLine("Press 1: Back");
-            Console.Write("Input: ");
 
-            input = Console.ReadLine();
-
-            Console.Clear();
-
-            switch (input)
-            {
-                case "1":
-                    {
-                        CustomerMenu();
-                        break;
-                    }
-            }
-        }
 
         public static void Offers()
         {
@@ -1239,12 +1368,12 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieType();
+                        MovieOptions.MovieType();
                         break;
                     }
                 case "2":
                     {
-                        CustomerMenu();
+                        MainMenu.CustomerMenu();
                         break;
                     }
             }
@@ -1270,12 +1399,12 @@ namespace Project_B
                     {
                         if (i == 1)
                         {
-                            Manager();
+                            MainMenu.Manager();
                             break;
                         }
                         else
                         {
-                            Employee();
+                            MainMenu.Employee();
                             break;
                         }
                     }
@@ -1293,7 +1422,7 @@ namespace Project_B
             File.WriteAllText("DailyRevenue.json", output);
 
             Console.Clear();
-            BeginMenu();
+            MainMenu.BeginMenu();
         }
 
         public static void ResetRevenue()
@@ -1305,125 +1434,6 @@ namespace Project_B
 
             string output = JsonConvert.SerializeObject(DailyRevenue, Formatting.Indented);
             File.WriteAllText("DailyRevenue.json", output);
-        }
-
-        public static void ResetSeats()
-        {
-            for (int i = 5; i > 0; i--)
-            {
-                dynamic jsonSelectedSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
-                jsonSelectedSeats[$"SelectedSeats"][i - 1] = "0";
-                string output1 = JsonConvert.SerializeObject(jsonSelectedSeats, Formatting.Indented);
-                File.WriteAllText(@"Seats.json", output1);
-            }
-
-            dynamic jsonSeatsHalls = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
-            for (int i = 1; i <= 500; i++)
-            {
-                if (i <= 150)
-                {
-                    jsonSeatsHalls[$"SeatsHall1"][i - 1] = i + "";
-                    jsonSeatsHalls[$"SeatsHall2"][i - 1] = i + "";
-                    jsonSeatsHalls[$"SeatsHall3"][i - 1] = i + "";
-
-                }
-                if (i > 150 && i <= 300)
-                {
-                    jsonSeatsHalls[$"SeatsHall2"][i - 1] = i + "";
-                    jsonSeatsHalls[$"SeatsHall3"][i - 1] = i + "";
-                }
-                if (i > 300 && i <= 500)
-                {
-                    jsonSeatsHalls[$"SeatsHall3"][i - 1] = i + "";
-                }
-            }
-            string output = JsonConvert.SerializeObject(jsonSeatsHalls, Formatting.Indented);
-            File.WriteAllText(@"Seats.json", output);
-        }
-
-        public static void ResetSelectedSeats(int hall)
-        {
-            var JObject1 = JObject.Parse(File.ReadAllText(@"Seats.json"));
-            var seats = JObject1.SelectToken($"$.SeatsHall{hall}").Values<string>().ToList();
-            var selectedSeatsList = JObject1.SelectToken($"$.SelectedSeats").Values<string>().ToList();
-
-            foreach (string selectedSeat in selectedSeatsList)
-            {
-                int selectedSeatInt = Convert.ToInt32(selectedSeat);
-                string chosenSeat = selectedSeat + "R";
-                if (selectedSeatInt > 0 && chosenSeat == seats[selectedSeatInt - 1])
-                {
-                    dynamic jsonReservedSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
-                    jsonReservedSeats[$"SeatsHall{hall}"][selectedSeatInt - 1] = selectedSeat;
-                    string output = JsonConvert.SerializeObject(jsonReservedSeats, Formatting.Indented);
-                    File.WriteAllText(@"Seats.json", output);
-                }
-            }
-
-            ResetSelectedSeats();
-        }
-
-        public static void ResetSelectedSeats()
-        {
-            for (int i = 5; i > 0; i--)
-            {
-                dynamic jsonSelectedSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
-                jsonSelectedSeats[$"SelectedSeats"][i - 1] = "0";
-                string output1 = JsonConvert.SerializeObject(jsonSelectedSeats, Formatting.Indented);
-                File.WriteAllText(@"Seats.json", output1);
-            }
-        }
-
-        public static void PrintSeats(int hall)
-        {
-            int maxSeats = 0;
-            if (hall == 1)
-            {
-                maxSeats = 150;
-            }
-            else if (hall == 2)
-            {
-                maxSeats = 300;
-            }
-            else if (hall == 3)
-            {
-                maxSeats = 500;
-            }
-
-            var JObject1 = JObject.Parse(File.ReadAllText(@"Seats.json"));
-            var seats = JObject1.SelectToken($"$.SeatsHall{hall}").Values<string>().ToList();
-
-            for (int z = 0; z < maxSeats; z++)
-            {
-                if (z % 10 == 0 && z < 10)
-                {
-                    Console.WriteLine(new string(' ', 25));
-                    Console.Write(new string(' ', 25));
-                }
-
-                if (z % 10 == 0 && z < 100 && z >= 10)
-                {
-                    Console.WriteLine(new string(' ', 20));
-                    Console.Write(new string(' ', 20));
-                }
-
-                if (z % 10 == 0 && z >= 100)
-                {
-                    Console.WriteLine(new string(' ', 15));
-                    Console.Write(new string(' ', 15));
-                }
-
-                if (seats[z] == z + 1 + "R")
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write(z + 1 + " ");
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.Write(seats[z] + " ");
-                }
-            }
         }
     }
 }
