@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OLD", "OLD", "{ACE945AA-6553-49D4-8BA3-1356E6F68420}"
 	ProjectSection(SolutionItems) = preProject
+		project B\Movies_oldcode.txt = project B\Movies_oldcode.txt
 		project B\OLD_CLASSES_PATRYK_ISMAIL.cs = project B\OLD_CLASSES_PATRYK_ISMAIL.cs
 		project B\Old_Code_ISMAIL.cs = project B\Old_Code_ISMAIL.cs
 		project B\OLD_CODE_TOM_FEUZI.cs = project B\OLD_CODE_TOM_FEUZI.cs
