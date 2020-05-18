@@ -384,7 +384,7 @@ namespace Project_B
             {
                 case "1":
                     {
-                        venuedate(1, previousScreen);
+                        venuedate(1, previousScreen);//Moet doorgeven aan VenueAndDate met movie ID en String met de naam van de film
                         break;
                     }
                 case "2":
@@ -572,6 +572,106 @@ namespace Project_B
             // End User Input Oucome
         }
         //End Choose Seat
+        public static void VenueAndDate(int MViD,string MovieName,int previousScreen)//Dit is de nieuwe Venue and Date
+        {
+            string[] movieDays = new string[5];
+            movieDays[0] = "Monday";
+            movieDays[1] = "Tuesday";
+            movieDays[2] = "Wednesday";
+            movieDays[3] = "Thursday";
+            movieDays[4] = "Friday";
+            string[] movieTimes = new string[4];
+            movieTimes[0] = "15:00";
+            movieTimes[1] = "17:00";
+            movieTimes[2] = "19:00";
+            movieTimes[3] = "21:00";
+            movieTimes[4] = "23:00";
+            string[] MvDTime = new string[(movieDays.Length * movieTimes.Length)];
+            int counterD = 0;
+            int counterT = 0;
+            for(int i = 0; i < MvDTime.Length; i++)
+            {
+                if(counterD > 4)
+                {
+                    counterD = 0;
+                }
+                if(counterT > 4)
+                {
+                    counterT = 0;
+                    counterD++;
+                }
+                MvDTime[i] = movieDays[counterD] + " / " + movieTimes[counterT];
+                counterT++;
+            }
+            if (MViD == 1)
+            {
+                VnDFrontend(MovieName, MvDTime[0], MvDTime[24], MvDTime[10], previousScreen);
+            }
+            if (MViD == 2)
+            {
+                VnDFrontend(MovieName, MvDTime[24], MvDTime[3], MvDTime[15], previousScreen);
+            }
+            if (MViD == 3)
+            {
+                VnDFrontend(MovieName, MvDTime[2], MvDTime[22], MvDTime[0], previousScreen);
+            }
+            if (MViD == 4)
+            {
+                VnDFrontend(MovieName, MvDTime[12], MvDTime[6], MvDTime[24], previousScreen);
+            }
+            if (MViD == 5)
+            {
+                VnDFrontend(MovieName, MvDTime[5], MvDTime[13], MvDTime[1], previousScreen);
+            }
+            if (MViD == 6)
+            {
+                VnDFrontend(MovieName, MvDTime[19], MvDTime[14], MvDTime[10], previousScreen);
+            }
+            if (MViD == 7)
+            {
+                VnDFrontend(MovieName, MvDTime[7], MvDTime[23], MvDTime[2], previousScreen);
+            }
+            if (MViD == 8)
+            {
+                VnDFrontend(MovieName, MvDTime[22], MvDTime[10], MvDTime[3], previousScreen);
+            }
+            if (MViD == 9)
+            {
+                VnDFrontend(MovieName, MvDTime[6], MvDTime[15], MvDTime[7], previousScreen);
+            }
+            if (MViD == 10)
+            {
+                VnDFrontend(MovieName, MvDTime[23], MvDTime[0], MvDTime[22], previousScreen);
+            }
+
+
+        }
+        public static void VnDFrontend(string MovieName, string Date, string Date2, string Date3,int previousScreen)//Dit hoort bij de nieuwe venue and date
+        {
+            Console.WriteLine("You chose the movie: " + MovieName);
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("This movie plays on:");
+            Console.WriteLine("1. Venue 1 " + Date + "\n" +"2. Venue 2 "+ Date2 + "\n" + "3. Venue 3 " + Date3);
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("Please type in the number of your choice to continue");
+            string choice = Console.ReadLine();
+            if(choice == "1")
+            {
+                ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5);
+            }//De choose seat is nog niet aangepast om ook een datum aan te nemen, wanneer dat is gedaan kan hier ook de date worden meegegeven
+            if(choice == "2")
+            {
+                ChooseSeat(2, MovieName, previousScreen, null, new string[5], null, 5);
+            }
+            if(choice == "3")
+            {
+                ChooseSeat(3, MovieName, previousScreen, null, new string[5], null, 5);
+            }
+
+        }
+
+
+
         public static void venuedate(int MViD, int previousScreen)
         {
             Tuple<int, string>[] VenueMVlist = new Tuple<int, string>[10];
