@@ -251,6 +251,7 @@ namespace Project_B
         //Choose Movie
         private static void MovieList(int previousScreen)
         {
+            
             var JsonString = File.ReadAllText("List.json");
             var JObject1 = JObject.Parse(JsonString);
             Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
