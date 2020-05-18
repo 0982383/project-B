@@ -1217,29 +1217,28 @@ namespace Project_B
                 File.WriteAllText(@"Seats.json", output1);
             }
 
-            for (int i = 1; i <= 150; i++)
-            {
-                dynamic jsonSeatsHall1 = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
-                jsonSeatsHall1[$"SeatsHall1"][i - 1] = i + "";
-                string output = JsonConvert.SerializeObject(jsonSeatsHall1, Formatting.Indented);
-                File.WriteAllText(@"Seats.json", output);
-            }
-
-            for (int i = 1; i <= 300; i++)
-            {
-                dynamic jsonSeatsHall2 = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
-                jsonSeatsHall2[$"SeatsHall2"][i - 1] = i + "";
-                string output = JsonConvert.SerializeObject(jsonSeatsHall2, Formatting.Indented);
-                File.WriteAllText(@"Seats.json", output);
-            }
-
+            dynamic jsonSeatsHalls = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
             for (int i = 1; i <= 500; i++)
             {
-                dynamic jsonSeatsHall3 = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
-                jsonSeatsHall3[$"SeatsHall3"][i - 1] = i + "";
-                string output = JsonConvert.SerializeObject(jsonSeatsHall3, Formatting.Indented);
-                File.WriteAllText(@"Seats.json", output);
+                if (i <= 150)
+                {
+                    jsonSeatsHalls[$"SeatsHall1"][i - 1] = i + "";
+                    jsonSeatsHalls[$"SeatsHall2"][i - 1] = i + "";
+                    jsonSeatsHalls[$"SeatsHall3"][i - 1] = i + "";
+
+                }
+                if (i > 150 && i <= 300)
+                {
+                    jsonSeatsHalls[$"SeatsHall2"][i - 1] = i + "";
+                    jsonSeatsHalls[$"SeatsHall3"][i - 1] = i + "";
+                }
+                if (i > 300 && i <= 500)
+                {
+                    jsonSeatsHalls[$"SeatsHall3"][i - 1] = i + "";
+                }
             }
+            string output = JsonConvert.SerializeObject(jsonSeatsHalls, Formatting.Indented);
+            File.WriteAllText(@"Seats.json", output);
         }
 
         public static void ResetSelectedSeats(int hall)
