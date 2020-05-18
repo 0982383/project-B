@@ -1239,7 +1239,7 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieList(1);
+                        MovieType();
                         break;
                     }
                 case "2":
