@@ -50,6 +50,11 @@ namespace Project_B
                         Environment.Exit(0);
                         break;
                     }
+                default:
+                    {
+                        BeginMenu();
+                        break;
+                    }
             }
         }
         public static void LoginScreen()
@@ -135,6 +140,11 @@ namespace Project_B
                         AboutUs();
                         break;
                     }
+                default:
+                    {
+                        CustomerMenu();
+                        break;
+                    }
             }
         }
 
@@ -163,6 +173,11 @@ namespace Project_B
                     {
                         Console.Clear();
                         Employee();
+                        break;
+                    }
+                default:
+                    {
+                        StaffMenu();
                         break;
                     }
             }
@@ -197,6 +212,11 @@ namespace Project_B
                 case "3":
                     {
                         StaffMenu();
+                        break;
+                    }
+                default:
+                    {
+                        Manager();
                         break;
                     }
             }
@@ -241,6 +261,12 @@ namespace Project_B
                         StaffMenu();
                         break;
                     }
+                default:
+                    {
+                        Employee();
+                        break;
+
+                    }
             }
         }
 
@@ -267,6 +293,11 @@ namespace Project_B
                 case "1":
                     {
                         CustomerMenu();
+                        break;
+                    }
+                default:
+                    {
+                        AboutUs();
                         break;
                     }
             }
@@ -351,6 +382,11 @@ namespace Project_B
                         MainMenu.StaffMenu();
                         break;
                     }
+                default:
+                    {
+                        AddMovie();
+                        break;
+                    }
             }
         }
 
@@ -383,6 +419,11 @@ namespace Project_B
                 case "3":
                     {
                         MovieList(1);
+                        break;
+                    }
+                default:
+                    {
+                        MovieType();
                         break;
                     }
             }
@@ -478,6 +519,11 @@ namespace Project_B
                             MainMenu.Employee();
                             break;
                         }
+                        break;
+                    }
+                default:
+                    {
+                        MovieList(1);
                         break;
                     }
             }
@@ -599,6 +645,7 @@ namespace Project_B
                         MovieOptions.MovieList(previousScreen);
                         break;
                     }
+               
             }
             // End User Input Oucome
         }
