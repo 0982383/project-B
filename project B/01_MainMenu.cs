@@ -15,12 +15,14 @@ namespace Project_B
         {
             SeatOptions.ResetSeats();
             PaymentSettings.ResetRevenue();
-            BeginMenu();
+            BeginMenu(new Clickstream());
         }
 
         // Main Menu
-        public static void BeginMenu()
+        public static void BeginMenu(Clickstream userClick)
         {
+            // Initialize Clickstream
+
             string OPT;
             Console.WriteLine("Welcome to cinema application");
             Console.WriteLine("Please choose a option to continue");
@@ -35,13 +37,15 @@ namespace Project_B
             {
                 case "1":
                     {
-                        CustomerMenu();
+                        userClick.AddInput("Customer Menu => ");
+                        CustomerMenu(userClick);
                         break;
                     }
 
                 case "2":
                     {
-                        LoginScreen();
+                        userClick.AddInput("Login Screen => ");
+                        LoginScreen(userClick);
                         break;
                     }
 
@@ -52,7 +56,7 @@ namespace Project_B
                     }
             }
         }
-        public static void LoginScreen()
+        public static void LoginScreen(Clickstream userClick)
         {
             Console.WriteLine("Hello , Enter you're username");
             Console.Write("username : ");
@@ -71,41 +75,46 @@ namespace Project_B
 
                 Console.Clear();
                 Console.WriteLine("You have logged in.");
-                CustomerMenu();
+                userClick.AddInput("Tom Customer Test => ");
+                CustomerMenu(userClick);
             }
             else if (inputpassWord == account2)
             {
                 Console.Clear();
                 Console.WriteLine("You have logged in.");
-                CustomerMenu();
+                userClick.AddInput("Feuzi Customer Test => ");
+                CustomerMenu(userClick);
             }
             else if (inputpassWord == account3)
             {
                 Console.Clear();
                 Console.WriteLine("You have logged in.");
-                CustomerMenu();
+                userClick.AddInput("Jordi Customer Test => ");
+                CustomerMenu(userClick);
             }
             else if (inputpassWord == account4)
             {
                 Console.Clear();
                 Console.WriteLine("You have logged in.");
-                StaffMenu();
+                userClick.AddInput("Ismail Staff Test => ");
+                StaffMenu(userClick);
             }
             else if (inputpassWord == account5)
             {
                 Console.Clear();
                 Console.WriteLine("You have logged in.");
-                StaffMenu();
+                userClick.AddInput("Patryck staff Test => ");
+                StaffMenu(userClick);
             }
             else
             {
                 Console.Clear();
                 Console.WriteLine("You have enterd wrong username/password. ");
-                LoginScreen();
+                LoginScreen(userClick);
 
             }
         }
-        public static void CustomerMenu()
+        public static void CustomerMenu(Clickstream userClick)
         {
             string OPT2;
             Console.WriteLine("Welcome customer, what would you like to do?");
@@ -122,23 +131,26 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieOptions.MovieType();
+                        userClick.AddInput("Movie Type => ");
+                        MovieOptions.MovieType(userClick);
                         break;
                     }
                 case "2":
                     {
-                        PaymentSettings.Offers();
+                        userClick.AddInput("Offers => ");
+                        PaymentSettings.Offers(userClick);
                         break;
                     }
                 case "3":
                     {
-                        AboutUs();
+                        userClick.AddInput("About Us => ");
+                        AboutUs(userClick);
                         break;
                     }
             }
         }
 
-        public static void StaffMenu()
+        public static void StaffMenu(Clickstream userClick)
         {
             string OPT3;
             Console.WriteLine("Welcome, do you wish to continue as manager or employee?");
@@ -155,20 +167,22 @@ namespace Project_B
                 case "manager":
                     {
                         Console.Clear();
-                        Manager();
+                        userClick.AddInput("Manager Screen => ");
+                        Manager(userClick);
                         break;
                     }
                 case "2":
                 case "employee":
                     {
                         Console.Clear();
-                        Employee();
+                        userClick.AddInput("Employee Screen => ");
+                        Employee(userClick);
                         break;
                     }
             }
         }
 
-        public static void Manager()
+        public static void Manager(Clickstream userClick)
         {
 
             string input;
@@ -186,24 +200,27 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieOptions.MovieType();
+                        userClick.AddInput("Movie Type => ");
+                        MovieOptions.MovieType(userClick);
                         break;
                     }
                 case "2":
                     {
-                        PaymentSettings.ShowDailyRevenue(1);
+                        userClick.AddInput("Daily Revenue => ");
+                        PaymentSettings.ShowDailyRevenue(1, userClick);
                         break;
                     }
                 case "3":
                     {
-                        StaffMenu();
+                        userClick.AddInput("Staff Menu => ");
+                        StaffMenu(userClick);
                         break;
                     }
             }
 
         }
 
-        public static void Employee()
+        public static void Employee(Clickstream userClick)
         {
 
             string input;
@@ -223,28 +240,32 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieOptions.MovieType();
+                        userClick.AddInput("Movie Type => ");
+                        MovieOptions.MovieType(userClick);
                         break;
                     }
                 case "2":
                     {
-                        MovieOptions.AddMovie();
+                        userClick.AddInput("Add/Remove Movie => ");
+                        MovieOptions.AddMovie(userClick);
                         break;
                     }
                 case "3":
                     {
-                        PaymentSettings.ShowDailyRevenue(2);
+                        userClick.AddInput("Daily Revenue => ");
+                        PaymentSettings.ShowDailyRevenue(2, userClick);
                         break;
                     }
                 case "4":
                     {
-                        StaffMenu();
+                        userClick.AddInput("Staff Menu => ");
+                        StaffMenu(userClick);
                         break;
                     }
             }
         }
 
-        public static void AboutUs()
+        public static void AboutUs(Clickstream userClick)
         {
             string input;
             Console.WriteLine("About Us\r\n");
@@ -266,14 +287,15 @@ namespace Project_B
             {
                 case "1":
                     {
-                        CustomerMenu();
+                        userClick.AddInput("Customer Menu => ");
+                        CustomerMenu(userClick);
                         break;
                     }
             }
         }
     }
     class MovieOptions {
-        public static void AddMovie()
+        public static void AddMovie(Clickstream userClick)
         {
             // json file should be updated @issie
             var JsonString = File.ReadAllText(@"List.json");
@@ -321,7 +343,8 @@ namespace Project_B
                         //Saving and Closing JSON File
 
                         Console.Clear();
-                        AddMovie();
+                        userClick.AddInput("Movie Added => ");
+                        AddMovie(userClick);
                         break;
                     }
                 case "2":
@@ -342,19 +365,21 @@ namespace Project_B
                         //Saving and Closing JSON File
 
                         Console.Clear();
-                        AddMovie();
+                        userClick.AddInput("Movie Removed => ");
+                        AddMovie(userClick);
                         break;
                     }
                 case "3":
                     {
                         Console.Clear();
-                        MainMenu.StaffMenu();
+                        userClick.AddInput("Staff Menu => ");
+                        MainMenu.StaffMenu(userClick);
                         break;
                     }
             }
         }
 
-        public static void MovieType()
+        public static void MovieType(Clickstream userClick)
         {
             string OPT;
             Console.WriteLine("Please choose an option to continue:");
@@ -370,26 +395,28 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieList(1);
+                        userClick.AddInput("2D => ");
+                        MovieList(1,userClick);
                         break;
                     }
 
                 case "2":
                     {
-                        MovieList(1);
+                        userClick.AddInput("3D => ");
+                        MovieList(1,userClick);
                         break;
                     }
 
                 case "3":
                     {
-                        MovieList(1);
+                        userClick.AddInput("IMAX => ");
+                        MovieList(1,userClick);
                         break;
                     }
             }
         }
-        // End Main Menu
-        //Choose Movie
-        public static void MovieList(int previousScreen)
+ 
+        public static void MovieList(int previousScreen, Clickstream userClick)
         {
             var JsonString = File.ReadAllText(@"List.json");
             var JObject1 = JObject.Parse(JsonString);
@@ -413,69 +440,82 @@ namespace Project_B
             {
                 case "1":
                     {
-                        Venue.venuedate(1, previousScreen);//Moet doorgeven aan VenueAndDate met movie ID en String met de naam van de film
+                        userClick.AddInput("Venue and Date => ");
+                        Venue.venuedate(1, previousScreen, userClick);//Moet doorgeven aan VenueAndDate met movie ID en String met de naam van de film
                         break;
                     }
                 case "2":
                     {
-                        Venue.venuedate(2, previousScreen);
+                        userClick.AddInput("Venue and Date => ");
+                        Venue.venuedate(2, previousScreen, userClick);
                         break;
                     }
                 case "3":
                     {
-                        Venue.venuedate(3, previousScreen);
+                        userClick.AddInput("Venue and Date => ");
+                        Venue.venuedate(3, previousScreen, userClick);
                         break;
                     }
                 case "4":
                     {
-                        Venue.venuedate(4, previousScreen);
+                        userClick.AddInput("Venue and Date => ");
+                        Venue.venuedate(4, previousScreen, userClick);
                         break;
                     }
                 case "5":
                     {
-                        Venue.venuedate(5, previousScreen);
+                        userClick.AddInput("Venue and Date => ");
+                        Venue.venuedate(5, previousScreen, userClick);
                         break;
                     }
                 case "6":
                     {
-                        Venue.venuedate(6, previousScreen);
+                        userClick.AddInput("Venue and Date => ");
+                        Venue.venuedate(6, previousScreen, userClick);
                         break;
                     }
                 case "7":
                     {
-                        Venue.venuedate(7, previousScreen);
+                        userClick.AddInput("Venue and Date => ");
+                        Venue.venuedate(7, previousScreen, userClick);
                         break;
                     }
                 case "8":
                     {
-                        Venue.venuedate(8, previousScreen);
+                        userClick.AddInput("Venue and Date => ");
+                        Venue.venuedate(8, previousScreen, userClick);
                         break;
                     }
                 case "9":
                     {
-                        Venue.venuedate(9, previousScreen);
+                        userClick.AddInput("Venue and Date => ");
+                        Venue.venuedate(9, previousScreen, userClick);
                         break;
                     }
                 case "10":
                     {
-                        Venue.venuedate(10, previousScreen);
+                        userClick.AddInput("Venue and Date => ");
+                        Venue.venuedate(10, previousScreen, userClick);
                         break;
                     }
                 case "11":
                     {
                         if (previousScreen == 1)
                         {
-                            MainMenu.CustomerMenu();
+                            userClick.AddInput("Customer Menu => ");
+                            MainMenu.CustomerMenu(userClick);
                             break;
                         }
                         if (previousScreen == 2)
                         {
-                            MainMenu.Manager();
+                            userClick.AddInput("Manager Menu => ");
+                            MainMenu.Manager(userClick);
                             break;
                         }
                         if (previousScreen == 3)
                         {
-                            MainMenu.Employee();
+                            userClick.AddInput("Employee Menu => ");
+                            MainMenu.Employee(userClick);
                             break;
                         }
                         break;
@@ -486,7 +526,7 @@ namespace Project_B
     class SeatOptions
     {
         //Choose Seat
-        public static void ChooseSeat(int hall, string movie, int previousScreen, string selectedSeats, string[] selectedSeatsArray, string error, int max)
+        public static void ChooseSeat(int hall, string movie, int previousScreen, string selectedSeats, string[] selectedSeatsArray, string error, int max, Clickstream userClick)
         {
             // Choose Seat Console Text
             string input;
@@ -539,7 +579,7 @@ namespace Project_B
                         {
                             error = "Error, seat does not exist.";
                             Console.Clear();
-                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max);
+                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max, userClick);
                             break;
                         }
 
@@ -548,7 +588,7 @@ namespace Project_B
                         {
                             error = "Seat already selected.";
                             Console.Clear();
-                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max);
+                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max, userClick);
                             break;
                         }
 
@@ -557,7 +597,7 @@ namespace Project_B
                         {
                             error = "Max amount of seats selected";
                             Console.Clear();
-                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max);
+                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max, userClick);
                             break;
                         }
                         else
@@ -573,7 +613,8 @@ namespace Project_B
                             File.WriteAllText(@"Seats.json", output1);
 
                             Console.Clear();
-                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, null, max - 1);
+                            userClick.AddInput($"Added Seat {seatNumberINT} => ");
+                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, null, max - 1, userClick);
                             break;
                         }
                         // End Checker
@@ -582,21 +623,24 @@ namespace Project_B
                     {
                         Console.Clear();
                         ResetSelectedSeats(hall);
-                        ChooseSeat(hall, movie, previousScreen, null, new string[5], null, 5);
+                        userClick.AddInput("Reset Seats => ");
+                        ChooseSeat(hall, movie, previousScreen, null, new string[5], null, 5, userClick);
                         break;
                     }
                 case "3":
                     {
+                        userClick.AddInput("Payment Screen => ");
                         Console.Clear();
                         ResetSelectedSeats();
-                        PaymentSettings.Payment();
+                        PaymentSettings.Payment(userClick);
                         break;
                     }
                 case "4":
                     {
+                        userClick.AddInput("Movie List => ");
                         Console.Clear();
                         ResetSelectedSeats(hall);
-                        MovieOptions.MovieList(previousScreen);
+                        MovieOptions.MovieList(previousScreen, userClick);
                         break;
                     }
             }
@@ -810,22 +854,22 @@ namespace Project_B
             string choice = Console.ReadLine();
             if (choice == "1")
             {
-                SeatOptions.ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5);
+                //SeatOptions.ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5);
             }//De choose seat is nog niet aangepast om ook een datum aan te nemen, wanneer dat is gedaan kan hier ook de date worden meegegeven
             if (choice == "2")
             {
-                SeatOptions.ChooseSeat(2, MovieName, previousScreen, null, new string[5], null, 5);
+                //SeatOptions.ChooseSeat(2, MovieName, previousScreen, null, new string[5], null, 5);
             }
             if (choice == "3")
             {
-                SeatOptions.ChooseSeat(3, MovieName, previousScreen, null, new string[5], null, 5);
+                //SeatOptions.ChooseSeat(3, MovieName, previousScreen, null, new string[5], null, 5);
             }
 
         }
 
 
 
-        public static void venuedate(int MViD, int previousScreen)
+        public static void venuedate(int MViD, int previousScreen, Clickstream userClick)
         {
             Tuple<int, string>[] VenueMVlist = new Tuple<int, string>[10];
             string[] MVList = new string[10] { "Jumanji", "Harry Potter", "Ride Along 2", "Spencer Confidential", "Fast & Furious", "6 Underground", "Deadpool 2", "Death at a Funeral", "Rush hour 3", "The Dark Knight" };
@@ -878,11 +922,13 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
-                    SeatOptions.ChooseSeat(1, "Jumanji", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(1, "Jumanji", previousScreen, null, new string[5], null, 5, userClick);
                 }
                 else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
-                    SeatOptions.ChooseSeat(3, "Jumanji", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(3, "Jumanji", previousScreen, null, new string[5], null, 5, userClick);
                 }
 
             }
@@ -903,11 +949,13 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
-                    SeatOptions.ChooseSeat(1, "Harry Potter", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(1, "Harry Potter", previousScreen, null, new string[5], null, 5, userClick);
                 }
                 else if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
-                    SeatOptions.ChooseSeat(2, "Harry Potter", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(2, "Harry Potter", previousScreen, null, new string[5], null, 5, userClick);
                 }
             }
             else if (MViD == 3)
@@ -927,11 +975,13 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
-                    SeatOptions.ChooseSeat(2, "Ride Along 2", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(2, "Ride Along 2", previousScreen, null, new string[5], null, 5, userClick);
                 }
                 else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
-                    SeatOptions.ChooseSeat(3, "Ride Along 2", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(3, "Ride Along 2", previousScreen, null, new string[5], null, 5, userClick);
                 }
             }
             else if (MViD == 4)
@@ -950,7 +1000,8 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
-                    SeatOptions.ChooseSeat(1, "Spencer Confidential", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(1, "Spencer Confidential", previousScreen, null, new string[5], null, 5,userClick);
                 }
             }
             else if (MViD == 5)
@@ -970,11 +1021,13 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
-                    SeatOptions.ChooseSeat(2, "Fast & Furious", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(2, "Fast & Furious", previousScreen, null, new string[5], null, 5, userClick);
                 }
                 else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
-                    SeatOptions.ChooseSeat(3, "Fast & Furious", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(3, "Fast & Furious", previousScreen, null, new string[5], null, 5, userClick);
                 }
             }
             else if (MViD == 6)
@@ -993,7 +1046,8 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
-                    SeatOptions.ChooseSeat(1, "6 Underground", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(1, "6 Underground", previousScreen, null, new string[5], null, 5, userClick);
                 }
             }
             else if (MViD == 7)
@@ -1012,7 +1066,8 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
-                    SeatOptions.ChooseSeat(2, "Deadpool 2", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(2, "Deadpool 2", previousScreen, null, new string[5], null, 5, userClick);
                 }
             }
             else if (MViD == 8)
@@ -1031,7 +1086,8 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
                 {
-                    SeatOptions.ChooseSeat(1, "Death at a Funeral", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(1, "Death at a Funeral", previousScreen, null, new string[5], null, 5, userClick);
                 }
             }
             else if (MViD == 9)
@@ -1051,11 +1107,13 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
                 {
-                    SeatOptions.ChooseSeat(2, "Rush Hour 3", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(2, "Rush Hour 3", previousScreen, null, new string[5], null, 5, userClick);
                 }
                 else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
-                    SeatOptions.ChooseSeat(3, "Rush Hour 3", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(3, "Rush Hour 3", previousScreen, null, new string[5], null, 5, userClick);
                 }
             }
             else if (MViD == 10)
@@ -1074,13 +1132,14 @@ namespace Project_B
                 Choice = Console.ReadLine().ToLower();
                 if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
                 {
-                    SeatOptions.ChooseSeat(3, "The Dark Knight", previousScreen, null, new string[5], null, 5);
+                    userClick.AddInput("Choose Seat => ");
+                    SeatOptions.ChooseSeat(3, "The Dark Knight", previousScreen, null, new string[5], null, 5, userClick);
                 }
             }
         }
     }
     class PaymentSettings {
-        public static void Payment()
+        public static void Payment(Clickstream userClick)
         {
 
 
@@ -1122,14 +1181,15 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
-                        IncrDailyRevenue(10);
+                        userClick.AddInput("Bought With Paypal => ");
+                        IncrDailyRevenue(10, userClick);
                     }
                     else
                     {
 
                         Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
-                        Payment();
+                        Payment(userClick);
                     }
 
 
@@ -1140,7 +1200,7 @@ namespace Project_B
                 {
                     Console.Clear();
                     Console.WriteLine("you did not press enter :/");
-                    Payment();
+                    Payment(userClick);
                 }
             }
 
@@ -1163,13 +1223,14 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
-                        IncrDailyRevenue(10);
+                        userClick.AddInput("Bought With IDeal => ");
+                        IncrDailyRevenue(10, userClick);                       
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
-                        Payment();
+                        Payment(userClick);
                     }
 
 
@@ -1181,7 +1242,7 @@ namespace Project_B
                 {
                     Console.Clear();
                     Console.WriteLine("you did not press enter :/");
-                    Payment();
+                    Payment(userClick);
                 }
             }
 
@@ -1204,13 +1265,14 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
-                        IncrDailyRevenue(10);
+                        userClick.AddInput("Bought With Creditcard => ");
+                        IncrDailyRevenue(10, userClick);
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
-                        Payment();
+                        Payment(userClick);
                     }
 
 
@@ -1221,7 +1283,7 @@ namespace Project_B
                 {
                     Console.Clear();
                     Console.WriteLine("you did not press enter :/");
-                    Payment();
+                    Payment(userClick);
                 }
             }
 
@@ -1244,13 +1306,14 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
-                        IncrDailyRevenue(10);
+                        userClick.AddInput("Bought With Bitcoin=> ");
+                        IncrDailyRevenue(10, userClick);  
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
-                        Payment();
+                        Payment(userClick);
                     }
 
 
@@ -1262,7 +1325,7 @@ namespace Project_B
 
                     Console.Clear();
                     Console.WriteLine("you did not press enter :/");
-                    Payment();
+                    Payment(userClick);
                 }
             }
 
@@ -1285,13 +1348,14 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
-                        IncrDailyRevenue(10);
+                        userClick.AddInput("Bought With Apple Pay => ");
+                        IncrDailyRevenue(10, userClick);
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
-                        Payment();
+                        Payment(userClick);
                     }
 
 
@@ -1303,7 +1367,7 @@ namespace Project_B
 
                     Console.Clear();
                     Console.WriteLine("you did not press enter :/");
-                    Payment();
+                    Payment(userClick);
                 }
             }
 
@@ -1326,13 +1390,14 @@ namespace Project_B
                     {
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
-                        IncrDailyRevenue(10);
+                        userClick.AddInput("Bought With Google Pay => ");
+                        IncrDailyRevenue(10, userClick);                      
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("you did not type the space bar :/");
-                        Payment();
+                        Payment(userClick);
                     }
 
 
@@ -1344,14 +1409,14 @@ namespace Project_B
 
                     Console.Clear();
                     Console.WriteLine("you did not press enter :/");
-                    Payment();
+                    Payment(userClick);
                 }
             }
         }
 
 
 
-        public static void Offers()
+        public static void Offers(Clickstream userClick)
         {
             string input;
             Console.WriteLine("These are our offers:\r\n");
@@ -1368,18 +1433,20 @@ namespace Project_B
             {
                 case "1":
                     {
-                        MovieOptions.MovieType();
+                        userClick.AddInput("Movie Type => ");
+                        MovieOptions.MovieType(userClick);
                         break;
                     }
                 case "2":
                     {
-                        MainMenu.CustomerMenu();
+                        userClick.AddInput("Customer Menu => ");
+                        MainMenu.CustomerMenu(userClick);
                         break;
                     }
             }
         }
 
-        public static void ShowDailyRevenue(int i)
+        public static void ShowDailyRevenue(int i, Clickstream userClick)
         {
             string input;
             var currentDailyRevenue = File.ReadAllText(@"DailyRevenue.json");
@@ -1399,19 +1466,21 @@ namespace Project_B
                     {
                         if (i == 1)
                         {
-                            MainMenu.Manager();
+                            userClick.AddInput("Manager Menu => ");
+                            MainMenu.Manager(userClick);
                             break;
                         }
                         else
                         {
-                            MainMenu.Employee();
+                            userClick.AddInput("Employee Menu => ");
+                            MainMenu.Employee(userClick);
                             break;
                         }
                     }
             }
         }
 
-        public static void IncrDailyRevenue(int i)
+        public static void IncrDailyRevenue(int i, Clickstream userClick)
         {
             var currentDailyRevenue = File.ReadAllText(@"DailyRevenue.json");
             dynamic DailyRevenue = JsonConvert.DeserializeObject(currentDailyRevenue);
@@ -1422,7 +1491,8 @@ namespace Project_B
             File.WriteAllText("DailyRevenue.json", output);
 
             Console.Clear();
-            MainMenu.BeginMenu();
+            userClick.AddToJson();
+            MainMenu.BeginMenu(new Clickstream());
         }
 
         public static void ResetRevenue()
@@ -1434,6 +1504,46 @@ namespace Project_B
 
             string output = JsonConvert.SerializeObject(DailyRevenue, Formatting.Indented);
             File.WriteAllText("DailyRevenue.json", output);
+        }
+    }
+
+    class Clickstream
+    {
+        private string Input;
+
+        public Clickstream()
+        {
+            Input = "";
+        }
+        
+        public void AddInput(string addedInput)
+        {
+            Input += addedInput;
+        }
+
+        public void AddToJson()
+        {
+            //Opening JSON file that needs to be modified
+            var initialJSON = File.ReadAllText(@"ClickStream.json");
+            dynamic jsonArray = JsonConvert.DeserializeObject(initialJSON);
+            int counter = 0;
+            if (jsonArray.ClickStreamOfUsers != null && jsonArray.ClickStreamOfUsers.Count == 0)
+            {
+                counter = 1;
+            }
+            else
+            {
+                counter = jsonArray.ClickStreamOfUsers.Count + 1;
+            }
+
+            string jsonInput = $"User {counter}) {Input}";
+            //Adding the movie
+            jsonArray["ClickStreamOfUsers"].Add(jsonInput);
+
+            //Saving and Closing JSON File
+            string output = JsonConvert.SerializeObject(jsonArray, Formatting.Indented);
+            File.WriteAllText(@"ClickStream.json", output);
+            //Saving and Closing JSON File
         }
     }
 }
