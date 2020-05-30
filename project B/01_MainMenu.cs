@@ -54,6 +54,11 @@ namespace Project_B
                         Environment.Exit(0);
                         break;
                     }
+                default:
+                    {
+                        BeginMenu();
+                        break;
+                    }
             }
         }
         public static void LoginScreen(Clickstream userClick)
@@ -147,6 +152,11 @@ namespace Project_B
                         AboutUs(userClick);
                         break;
                     }
+                default:
+                    {
+                        CustomerMenu();
+                        break;
+                    }
             }
         }
 
@@ -177,6 +187,11 @@ namespace Project_B
                         Console.Clear();
                         userClick.AddInput("Employee Screen => ");
                         Employee(userClick);
+                        break;
+                    }
+                default:
+                    {
+                        StaffMenu();
                         break;
                     }
             }
@@ -214,6 +229,11 @@ namespace Project_B
                     {
                         userClick.AddInput("Staff Menu => ");
                         StaffMenu(userClick);
+                        break;
+                    }
+                default:
+                    {
+                        Manager();
                         break;
                     }
             }
@@ -262,6 +282,12 @@ namespace Project_B
                         StaffMenu(userClick);
                         break;
                     }
+                default:
+                    {
+                        Employee();
+                        break;
+
+                    }
             }
         }
 
@@ -289,6 +315,11 @@ namespace Project_B
                     {
                         userClick.AddInput("Customer Menu => ");
                         CustomerMenu(userClick);
+                        break;
+                    }
+                default:
+                    {
+                        AboutUs();
                         break;
                     }
             }
@@ -376,6 +407,11 @@ namespace Project_B
                         MainMenu.StaffMenu(userClick);
                         break;
                     }
+                default:
+                    {
+                        AddMovie();
+                        break;
+                    }
             }
         }
 
@@ -411,6 +447,11 @@ namespace Project_B
                     {
                         userClick.AddInput("IMAX => ");
                         MovieList(1,userClick);
+                        break;
+                    }
+                default:
+                    {
+                        MovieType();
                         break;
                     }
             }
@@ -518,6 +559,11 @@ namespace Project_B
                             MainMenu.Employee(userClick);
                             break;
                         }
+                        break;
+                    }
+                default:
+                    {
+                        MovieList(1);
                         break;
                     }
             }
@@ -643,6 +689,7 @@ namespace Project_B
                         MovieOptions.MovieList(previousScreen, userClick);
                         break;
                     }
+               
             }
             // End User Input Oucome
         }
