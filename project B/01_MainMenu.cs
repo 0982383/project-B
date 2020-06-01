@@ -481,62 +481,73 @@ namespace Project_B
             {
                 case "1":
                     {
+                        //VenueAndDate(int MViD, string MovieName, int previousScreen, Clickstream userClick)
                         userClick.AddInput("Venue and Date => ");
-                        Venue.venuedate(1, previousScreen, userClick);//Moet doorgeven aan VenueAndDate met movie ID en String met de naam van de film
+                        //Venue.venuedate(1, previousScreen, userClick);//Moet doorgeven aan VenueAndDate met movie ID en String met de naam van de film
+                        Venue.VenueAndDate(1,myList[0],previousScreen,userClick);
                         break;
                     }
                 case "2":
                     {
                         userClick.AddInput("Venue and Date => ");
-                        Venue.venuedate(2, previousScreen, userClick);
+                        //Venue.venuedate(2, previousScreen, userClick);
+                        Venue.VenueAndDate(2, myList[1], previousScreen, userClick);
                         break;
                     }
                 case "3":
                     {
                         userClick.AddInput("Venue and Date => ");
-                        Venue.venuedate(3, previousScreen, userClick);
+                        //Venue.venuedate(3, previousScreen, userClick);
+                        Venue.VenueAndDate(3, myList[2], previousScreen, userClick);
                         break;
                     }
                 case "4":
                     {
                         userClick.AddInput("Venue and Date => ");
-                        Venue.venuedate(4, previousScreen, userClick);
+                        //Venue.venuedate(4, previousScreen, userClick);
+                        Venue.VenueAndDate(4, myList[3], previousScreen, userClick);
                         break;
                     }
                 case "5":
                     {
                         userClick.AddInput("Venue and Date => ");
-                        Venue.venuedate(5, previousScreen, userClick);
+                        //Venue.venuedate(5, previousScreen, userClick);
+                        Venue.VenueAndDate(5, myList[4], previousScreen, userClick);
                         break;
                     }
                 case "6":
                     {
                         userClick.AddInput("Venue and Date => ");
-                        Venue.venuedate(6, previousScreen, userClick);
+                        //Venue.venuedate(6, previousScreen, userClick);
+                        Venue.VenueAndDate(6, myList[5], previousScreen, userClick);
                         break;
                     }
                 case "7":
                     {
                         userClick.AddInput("Venue and Date => ");
-                        Venue.venuedate(7, previousScreen, userClick);
+                        //Venue.venuedate(7, previousScreen, userClick);
+                        Venue.VenueAndDate(7, myList[6], previousScreen, userClick);
                         break;
                     }
                 case "8":
                     {
                         userClick.AddInput("Venue and Date => ");
-                        Venue.venuedate(8, previousScreen, userClick);
+                        //Venue.venuedate(8, previousScreen, userClick);
+                        Venue.VenueAndDate(8, myList[7], previousScreen, userClick);
                         break;
                     }
                 case "9":
                     {
                         userClick.AddInput("Venue and Date => ");
-                        Venue.venuedate(9, previousScreen, userClick);
+                        //Venue.venuedate(9, previousScreen, userClick);
+                        Venue.VenueAndDate(9, myList[8], previousScreen, userClick);
                         break;
                     }
                 case "10":
                     {
                         userClick.AddInput("Venue and Date => ");
-                        Venue.venuedate(10, previousScreen, userClick);
+                        //Venue.venuedate(10, previousScreen, userClick);
+                        Venue.VenueAndDate(10, myList[9], previousScreen, userClick);
                         break;
                     }
                 case "11":
@@ -572,7 +583,7 @@ namespace Project_B
     class SeatOptions
     {
         //Choose Seat
-        public static void ChooseSeat(int hall, string movie, int previousScreen, string selectedSeats, string[] selectedSeatsArray, string error, int max, Clickstream userClick)
+        public static void ChooseSeat(int hall, string movie, int previousScreen, string selectedSeats, string[] selectedSeatsArray, string error, int max, string Date, Clickstream userClick)
         {
             // Choose Seat Console Text
             string input;
@@ -625,7 +636,7 @@ namespace Project_B
                         {
                             error = "Error, seat does not exist.";
                             Console.Clear();
-                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max, userClick);
+                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max, Date, userClick);
                             break;
                         }
 
@@ -634,7 +645,7 @@ namespace Project_B
                         {
                             error = "Seat already selected.";
                             Console.Clear();
-                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max, userClick);
+                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max, Date, userClick);
                             break;
                         }
 
@@ -643,7 +654,7 @@ namespace Project_B
                         {
                             error = "Max amount of seats selected";
                             Console.Clear();
-                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max, userClick);
+                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max, Date, userClick);
                             break;
                         }
                         else
@@ -660,7 +671,7 @@ namespace Project_B
 
                             Console.Clear();
                             userClick.AddInput($"Added Seat {seatNumberINT} => ");
-                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, null, max - 1, userClick);
+                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, null, max - 1, Date, userClick);
                             break;
                         }
                         // End Checker
@@ -670,15 +681,25 @@ namespace Project_B
                         Console.Clear();
                         ResetSelectedSeats(hall);
                         userClick.AddInput("Reset Seats => ");
-                        ChooseSeat(hall, movie, previousScreen, null, new string[5], null, 5, userClick);
+                        ChooseSeat(hall, movie, previousScreen, null, new string[5], null, 5, Date, userClick);
                         break;
                     }
                 case "3":
                     {
-                        userClick.AddInput("Payment Screen => ");
-                        Console.Clear();
-                        ResetSelectedSeats();
-                        PaymentSettings.Payment(userClick);
+                        if (max == 5)
+                        {
+                            error = "No seats currently selected, please select a seat.";
+                            Console.Clear();
+                            ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max, Date, userClick);
+                        }
+                        else
+                        {
+                            userClick.AddInput("Payment Screen => ");
+                            Console.Clear();
+                            ResetSelectedSeats();
+                            PaymentSettings.Payment(userClick);
+                            break;
+                        }
                         break;
                     }
                 case "4":
@@ -816,7 +837,7 @@ namespace Project_B
     }
     class Venue
     {
-        public static void VenueAndDate(int MViD, string MovieName, int previousScreen)//Dit is de nieuwe Venue and Date
+        public static void VenueAndDate(int MViD, string MovieName, int previousScreen, Clickstream userClick)//Dit is de nieuwe Venue and Date
             {
                 string[] movieDays = new string[5];
                 movieDays[0] = "Monday";
@@ -824,7 +845,7 @@ namespace Project_B
                 movieDays[2] = "Wednesday";
                 movieDays[3] = "Thursday";
                 movieDays[4] = "Friday";
-                string[] movieTimes = new string[4];
+                string[] movieTimes = new string[5];
                 movieTimes[0] = "15:00";
                 movieTimes[1] = "17:00";
                 movieTimes[2] = "19:00";
@@ -849,48 +870,48 @@ namespace Project_B
                 }
                 if (MViD == 1)
                 {
-                    VnDFrontend(MovieName, MvDTime[0], MvDTime[24], MvDTime[10], previousScreen);
+                    VnDFrontend(MovieName, MvDTime[0], MvDTime[24], MvDTime[10], previousScreen, userClick);
                 }
                 if (MViD == 2)
                 {
-                    VnDFrontend(MovieName, MvDTime[24], MvDTime[3], MvDTime[15], previousScreen);
+                    VnDFrontend(MovieName, MvDTime[24], MvDTime[3], MvDTime[15], previousScreen, userClick);
                 }
                 if (MViD == 3)
                 {
-                    VnDFrontend(MovieName, MvDTime[2], MvDTime[22], MvDTime[0], previousScreen);
+                    VnDFrontend(MovieName, MvDTime[2], MvDTime[22], MvDTime[0], previousScreen, userClick);
                 }
                 if (MViD == 4)
                 {
-                    VnDFrontend(MovieName, MvDTime[12], MvDTime[6], MvDTime[24], previousScreen);
+                    VnDFrontend(MovieName, MvDTime[12], MvDTime[6], MvDTime[24], previousScreen, userClick);
                 }
                 if (MViD == 5)
                 {
-                    VnDFrontend(MovieName, MvDTime[5], MvDTime[13], MvDTime[1], previousScreen);
+                    VnDFrontend(MovieName, MvDTime[5], MvDTime[13], MvDTime[1], previousScreen, userClick);
                 }
                 if (MViD == 6)
                 {
-                    VnDFrontend(MovieName, MvDTime[19], MvDTime[14], MvDTime[10], previousScreen);
+                    VnDFrontend(MovieName, MvDTime[19], MvDTime[14], MvDTime[10], previousScreen, userClick);
                 }
                 if (MViD == 7)
                 {
-                    VnDFrontend(MovieName, MvDTime[7], MvDTime[23], MvDTime[2], previousScreen);
+                    VnDFrontend(MovieName, MvDTime[7], MvDTime[23], MvDTime[2], previousScreen, userClick);
                 }
                 if (MViD == 8)
                 {
-                    VnDFrontend(MovieName, MvDTime[22], MvDTime[10], MvDTime[3], previousScreen);
+                    VnDFrontend(MovieName, MvDTime[22], MvDTime[10], MvDTime[3], previousScreen, userClick);
                 }
                 if (MViD == 9)
                 {
-                    VnDFrontend(MovieName, MvDTime[6], MvDTime[15], MvDTime[7], previousScreen);
+                    VnDFrontend(MovieName, MvDTime[6], MvDTime[15], MvDTime[7], previousScreen, userClick);
                 }
                 if (MViD == 10)
                 {
-                    VnDFrontend(MovieName, MvDTime[23], MvDTime[0], MvDTime[22], previousScreen);
+                    VnDFrontend(MovieName, MvDTime[23], MvDTime[0], MvDTime[22], previousScreen, userClick);
                 }
 
 
         }
-        public static void VnDFrontend(string MovieName, string Date, string Date2, string Date3, int previousScreen)//Dit hoort bij de nieuwe venue and date
+        public static void VnDFrontend(string MovieName, string Date, string Date2, string Date3, int previousScreen, Clickstream userClick)//Dit hoort bij de nieuwe venue and date
         {
             Console.WriteLine("You chose the movie: " + MovieName);
             Console.WriteLine("--------------------------------------------");
@@ -901,288 +922,20 @@ namespace Project_B
             string choice = Console.ReadLine();
             if (choice == "1")
             {
-                //SeatOptions.ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5);
+                userClick.AddInput("Choose Seat => ");
+                SeatOptions.ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5, Date , userClick);
             }//De choose seat is nog niet aangepast om ook een datum aan te nemen, wanneer dat is gedaan kan hier ook de date worden meegegeven
             if (choice == "2")
             {
-                //SeatOptions.ChooseSeat(2, MovieName, previousScreen, null, new string[5], null, 5);
+                userClick.AddInput("Choose Seat => ");
+                SeatOptions.ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5, Date2, userClick);
             }
             if (choice == "3")
             {
-                //SeatOptions.ChooseSeat(3, MovieName, previousScreen, null, new string[5], null, 5);
+                userClick.AddInput("Choose Seat => ");
+                SeatOptions.ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5, Date3, userClick);
             }
 
-        }
-
-
-
-        public static void venuedate(int MViD, int previousScreen, Clickstream userClick)
-        {
-            Tuple<int, string>[] VenueMVlist = new Tuple<int, string>[10];
-            string[] MVList = new string[10] { "Jumanji", "Harry Potter", "Ride Along 2", "Spencer Confidential", "Fast & Furious", "6 Underground", "Deadpool 2", "Death at a Funeral", "Rush hour 3", "The Dark Knight" };
-            for (int i = 0; i < 10; i++)
-            {
-                if (i < 3)
-                {
-                    VenueMVlist[i] = Tuple.Create(1, MVList[i]);
-                }
-                else if (i < 6)
-                {
-                    VenueMVlist[i] = Tuple.Create(2, MVList[i]);
-                }
-                else
-                {
-                    VenueMVlist[i] = Tuple.Create(3, MVList[i]);
-                }
-
-            }
-            string[] mvTimes = new string[5] { "Wednesday: 11:30 - 16:00 - 19:00 ", "Thursday: 11:30 - 16:00 - 19:00", "Tuesday:  11:30 - 16:00 - 19:00", "Monday: 11:30 - 16:00 - 19:00", "Friday: 11:30 - 16:00 - 19:00" };
-            Tuple<string, string>[] VnDate1 = new Tuple<string, string>[5];
-            Tuple<string, string>[] VnDate2 = new Tuple<string, string>[5];
-            Tuple<string, string>[] VnDate3 = new Tuple<string, string>[5];
-            for (int k = 0; k < 5; k++)
-            {
-                VnDate1[k] = Tuple.Create("Venue 1", mvTimes[k]);
-                VnDate2[k] = Tuple.Create("Venue 2", mvTimes[k]);
-                VnDate3[k] = Tuple.Create("Venue 3", mvTimes[k]);
-            }
-            string TL = "-------------------------------";
-            string DVe = "Venue's and Time:";
-            string plw = "Please write down the venue number and time in the following format to continue:";
-            string frmat = "Venue#/##:##";
-
-            Console.Clear();
-            if (MViD == 1)
-            {
-                string Choice;
-                Console.WriteLine(TL);
-                Console.WriteLine("Selected movie:" + MVList[0]);
-                Console.WriteLine(TL);
-                Console.WriteLine(DVe);
-                Console.WriteLine(VnDate1[0].Item1 + ": " + VnDate1[0].Item2);
-                Console.WriteLine(VnDate3[4].Item1 + ": " + VnDate3[4].Item2);
-                Console.WriteLine(TL);
-                Console.WriteLine(plw);
-                Console.WriteLine(frmat);
-                Console.WriteLine(TL);
-                Console.Write("Input:");
-                Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(1, "Jumanji", previousScreen, null, new string[5], null, 5, userClick);
-                }
-                else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(3, "Jumanji", previousScreen, null, new string[5], null, 5, userClick);
-                }
-
-            }
-            else if (MViD == 2)
-            {
-                string Choice;
-                Console.WriteLine(TL);
-                Console.WriteLine("Selected movie:" + MVList[1]);
-                Console.WriteLine(TL);
-                Console.WriteLine(DVe);
-                Console.WriteLine(VnDate1[1].Item1 + ": " + VnDate1[1].Item2);
-                Console.WriteLine(VnDate2[4].Item1 + ": " + VnDate2[4].Item2);
-                Console.WriteLine(TL);
-                Console.WriteLine(plw);
-                Console.WriteLine(frmat);
-                Console.WriteLine(TL);
-                Console.Write("Input:");
-                Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(1, "Harry Potter", previousScreen, null, new string[5], null, 5, userClick);
-                }
-                else if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(2, "Harry Potter", previousScreen, null, new string[5], null, 5, userClick);
-                }
-            }
-            else if (MViD == 3)
-            {
-                string Choice;
-                Console.WriteLine(TL);
-                Console.WriteLine("Selected movie:" + MVList[2]);
-                Console.WriteLine(TL);
-                Console.WriteLine(DVe);
-                Console.WriteLine(VnDate2[0].Item1 + ": " + VnDate2[0].Item2);
-                Console.WriteLine(VnDate3[1].Item1 + ": " + VnDate3[1].Item2);
-                Console.WriteLine(TL);
-                Console.WriteLine(plw);
-                Console.WriteLine(frmat);
-                Console.WriteLine(TL);
-                Console.Write("Input:");
-                Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(2, "Ride Along 2", previousScreen, null, new string[5], null, 5, userClick);
-                }
-                else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(3, "Ride Along 2", previousScreen, null, new string[5], null, 5, userClick);
-                }
-            }
-            else if (MViD == 4)
-            {
-                string Choice;
-                Console.WriteLine(TL);
-                Console.WriteLine("Selected movie:" + MVList[3]);
-                Console.WriteLine(TL);
-                Console.WriteLine(DVe);
-                Console.WriteLine(VnDate1[2].Item1 + ": " + VnDate1[2].Item2);
-                Console.WriteLine(TL);
-                Console.WriteLine(plw);
-                Console.WriteLine(frmat);
-                Console.WriteLine(TL);
-                Console.Write("Input:");
-                Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(1, "Spencer Confidential", previousScreen, null, new string[5], null, 5,userClick);
-                }
-            }
-            else if (MViD == 5)
-            {
-                string Choice;
-                Console.WriteLine(TL);
-                Console.WriteLine("Selected movie:" + MVList[4]);
-                Console.WriteLine(TL);
-                Console.WriteLine(DVe);
-                Console.WriteLine(VnDate2[3].Item1 + ": " + VnDate2[3].Item2);
-                Console.WriteLine(VnDate3[0].Item1 + ": " + VnDate3[0].Item2);
-                Console.WriteLine(TL);
-                Console.WriteLine(plw);
-                Console.WriteLine(frmat);
-                Console.WriteLine(TL);
-                Console.Write("Input:");
-                Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(2, "Fast & Furious", previousScreen, null, new string[5], null, 5, userClick);
-                }
-                else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(3, "Fast & Furious", previousScreen, null, new string[5], null, 5, userClick);
-                }
-            }
-            else if (MViD == 6)
-            {
-                string Choice;
-                Console.WriteLine(TL);
-                Console.WriteLine("Selected movie:" + MVList[5]);
-                Console.WriteLine(TL);
-                Console.WriteLine(DVe);
-                Console.WriteLine(VnDate1[4].Item1 + ": " + VnDate1[4].Item2);
-                Console.WriteLine(TL);
-                Console.WriteLine(plw);
-                Console.WriteLine(frmat);
-                Console.WriteLine(TL);
-                Console.Write("Input:");
-                Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(1, "6 Underground", previousScreen, null, new string[5], null, 5, userClick);
-                }
-            }
-            else if (MViD == 7)
-            {
-                string Choice;
-                Console.WriteLine(TL);
-                Console.WriteLine("Selected movie:" + MVList[6]);
-                Console.WriteLine(TL);
-                Console.WriteLine(DVe);
-                Console.WriteLine(VnDate2[2].Item1 + ": " + VnDate2[2].Item2);
-                Console.WriteLine(TL);
-                Console.WriteLine(plw);
-                Console.WriteLine(frmat);
-                Console.WriteLine(TL);
-                Console.Write("Input:");
-                Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(2, "Deadpool 2", previousScreen, null, new string[5], null, 5, userClick);
-                }
-            }
-            else if (MViD == 8)
-            {
-                string Choice;
-                Console.WriteLine(TL);
-                Console.WriteLine("Selected movie:" + MVList[7]);
-                Console.WriteLine(TL);
-                Console.WriteLine(DVe);
-                Console.WriteLine(VnDate1[3].Item1 + ": " + VnDate1[3].Item2);
-                Console.WriteLine(TL);
-                Console.WriteLine(plw);
-                Console.WriteLine(frmat);
-                Console.WriteLine(TL);
-                Console.Write("Input:");
-                Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue1/11:30" || Choice == "venue1/16:00" || Choice == "venue1/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(1, "Death at a Funeral", previousScreen, null, new string[5], null, 5, userClick);
-                }
-            }
-            else if (MViD == 9)
-            {
-                string Choice;
-                Console.WriteLine(TL);
-                Console.WriteLine("Selected movie:" + MVList[8]);
-                Console.WriteLine(TL);
-                Console.WriteLine(DVe);
-                Console.WriteLine(VnDate2[1].Item1 + ": " + VnDate2[1].Item2);
-                Console.WriteLine(VnDate3[3].Item1 + ": " + VnDate3[3].Item2);
-                Console.WriteLine(TL);
-                Console.WriteLine(plw);
-                Console.WriteLine(frmat);
-                Console.WriteLine(TL);
-                Console.Write("Input:");
-                Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue2/11:30" || Choice == "venue2/16:00" || Choice == "venue2/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(2, "Rush Hour 3", previousScreen, null, new string[5], null, 5, userClick);
-                }
-                else if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(3, "Rush Hour 3", previousScreen, null, new string[5], null, 5, userClick);
-                }
-            }
-            else if (MViD == 10)
-            {
-                string Choice;
-                Console.WriteLine(TL);
-                Console.WriteLine("Selected movie:" + MVList[9]);
-                Console.WriteLine(TL);
-                Console.WriteLine(DVe);
-                Console.WriteLine(VnDate3[2].Item1 + ": " + VnDate3[2].Item2);
-                Console.WriteLine(TL);
-                Console.WriteLine(plw);
-                Console.WriteLine(frmat);
-                Console.WriteLine(TL);
-                Console.Write("Input:");
-                Choice = Console.ReadLine().ToLower();
-                if (Choice == "venue3/11:30" || Choice == "venue3/16:00" || Choice == "venue3/19:00")
-                {
-                    userClick.AddInput("Choose Seat => ");
-                    SeatOptions.ChooseSeat(3, "The Dark Knight", previousScreen, null, new string[5], null, 5, userClick);
-                }
-            }
         }
     }
     class PaymentSettings {
