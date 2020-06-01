@@ -56,7 +56,7 @@ namespace Project_B
                     }
                 default:
                     {
-                        BeginMenu();
+                        BeginMenu(userClick);
                         break;
                     }
             }
@@ -154,7 +154,7 @@ namespace Project_B
                     }
                 default:
                     {
-                        CustomerMenu();
+                        CustomerMenu(userClick);
                         break;
                     }
             }
@@ -191,7 +191,7 @@ namespace Project_B
                     }
                 default:
                     {
-                        StaffMenu();
+                        StaffMenu(userClick);
                         break;
                     }
             }
@@ -233,7 +233,7 @@ namespace Project_B
                     }
                 default:
                     {
-                        Manager();
+                        Manager(userClick);
                         break;
                     }
             }
@@ -284,7 +284,7 @@ namespace Project_B
                     }
                 default:
                     {
-                        Employee();
+                        Employee(userClick);
                         break;
 
                     }
@@ -319,7 +319,7 @@ namespace Project_B
                     }
                 default:
                     {
-                        AboutUs();
+                        AboutUs(userClick);
                         break;
                     }
             }
@@ -409,7 +409,7 @@ namespace Project_B
                     }
                 default:
                     {
-                        AddMovie();
+                        AddMovie(userClick);
                         break;
                     }
             }
@@ -451,7 +451,7 @@ namespace Project_B
                     }
                 default:
                     {
-                        MovieType();
+                        MovieType(userClick);
                         break;
                     }
             }
@@ -563,7 +563,7 @@ namespace Project_B
                     }
                 default:
                     {
-                        MovieList(1);
+                        MovieList(1, userClick);
                         break;
                     }
             }
