@@ -1216,8 +1216,9 @@ namespace Project_B
             }
             else
             {
+                Console.Clear();
                 Payment(userClick);
-                break;
+                
             }
         }
 
