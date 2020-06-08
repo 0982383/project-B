@@ -122,7 +122,7 @@ namespace Project_B
         }
         // customer options
         public static void CustomerMenu(Clickstream userClick)
-        {
+        { //Menu for customers
             string OPT2;
             Console.WriteLine("Welcome customer, what would you like to do?");
             Console.WriteLine("Please choose a number to continue");
@@ -138,19 +138,19 @@ namespace Project_B
             {
                 case "1":
                     {
-                        userClick.AddInput("Movie Type => ");
+                        userClick.AddInput("Movie Type => ");//To movielist
                         MovieOptions.MovieType(userClick);
                         break;
                     }
                 case "2":
                     {
-                        userClick.AddInput("Offers => ");
+                        userClick.AddInput("Offers => ");//To offers screen
                         PaymentSettings.Offers(userClick);
                         break;
                     }
                 case "3":
                     {
-                        userClick.AddInput("About Us => ");
+                        userClick.AddInput("About Us => ");//To about us screen
                         AboutUs(userClick);
                         break;
                     }
@@ -163,7 +163,7 @@ namespace Project_B
         }
         // staff options
         public static void StaffMenu(Clickstream userClick)
-        {
+        { 
             string OPT3;
             Console.WriteLine("Welcome, do you wish to continue as manager or employee?");
             Console.WriteLine("1. Manager");
@@ -179,7 +179,7 @@ namespace Project_B
                 case "manager":
                     {
                         Console.Clear();
-                        userClick.AddInput("Manager Screen => ");
+                        userClick.AddInput("Manager Screen => ");//To manager menu
                         Manager(userClick);
                         break;
                     }
@@ -187,7 +187,7 @@ namespace Project_B
                 case "employee":
                     {
                         Console.Clear();
-                        userClick.AddInput("Employee Screen => ");
+                        userClick.AddInput("Employee Screen => ");//To employee menu
                         Employee(userClick);
                         break;
                     }
@@ -201,7 +201,7 @@ namespace Project_B
 
         public static void Manager(Clickstream userClick)
         {
-
+            //Manager menu 
             string input;
             Console.WriteLine("Manager Menu");
             Console.WriteLine("Press 1: Choose a Movie");
@@ -217,19 +217,19 @@ namespace Project_B
             {
                 case "1":
                     {
-                        userClick.AddInput("Movie Type => ");
+                        userClick.AddInput("Movie Type => ");//To choose movie screen
                         MovieOptions.MovieType(userClick);
                         break;
                     }
                 case "2":
                     {
                         userClick.AddInput("Daily Revenue => ");
-                        PaymentSettings.ShowDailyRevenue(1, userClick);
+                        PaymentSettings.ShowDailyRevenue(1, userClick);//To show daily revenue screen
                         break;
                     }
                 case "3":
                     {
-                        userClick.AddInput("Staff Menu => ");
+                        userClick.AddInput("Staff Menu => ");//Back to first menu
                         StaffMenu(userClick);
                         break;
                     }
@@ -244,7 +244,7 @@ namespace Project_B
 
         public static void Employee(Clickstream userClick)
         {
-
+            //Employee menu 
             string input;
             Console.WriteLine("Employee Menu");
             Console.WriteLine("1: Choose a Movie");
@@ -262,25 +262,25 @@ namespace Project_B
             {
                 case "1":
                     {
-                        userClick.AddInput("Movie Type => ");
+                        userClick.AddInput("Movie Type => ");//to movie selection screen
                         MovieOptions.MovieType(userClick);
                         break;
                     }
                 case "2":
                     {
-                        userClick.AddInput("Add/Remove Movie => ");
+                        userClick.AddInput("Add/Remove Movie => ");//To add or remove movie screen
                         MovieOptions.AddMovie(userClick);
                         break;
                     }
                 case "3":
                     {
-                        userClick.AddInput("Daily Revenue => ");
+                        userClick.AddInput("Daily Revenue => ");//To daily revenue screen 
                         PaymentSettings.ShowDailyRevenue(2, userClick);
                         break;
                     }
                 case "4":
                     {
-                        userClick.AddInput("Staff Menu => ");
+                        userClick.AddInput("Staff Menu => ");//Back to the first menu 
                         StaffMenu(userClick);
                         break;
                     }
@@ -294,7 +294,7 @@ namespace Project_B
         }
 
         public static void AboutUs(Clickstream userClick)
-        {
+        {   //About us screen showing some general information about the cinema
             string input;
             Console.WriteLine("About Us\r\n");
             Console.WriteLine("CinemaWorld has 3 venues with a capacity of 150, 300 and 500 seats respectively.\r\n" +
@@ -418,7 +418,7 @@ namespace Project_B
         }
         // choosing movie type before selecting movie
         public static void MovieType(Clickstream userClick)
-        {
+        { // screen to select the way the client wants to watch the movie
             string OPT;
             Console.WriteLine("Please choose an option to continue:");
             Console.WriteLine("1. 2D");
@@ -460,7 +460,7 @@ namespace Project_B
         }
         // calling movie list + selecting venue
         public static void MovieList(int previousScreen, Clickstream userClick)
-        {
+        {//shows the Movie list 
             var JsonString = File.ReadAllText(@"List.json");
             var JObject1 = JObject.Parse(JsonString);
             Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
@@ -473,7 +473,7 @@ namespace Project_B
             Console.WriteLine("11) Exit");
             Console.WriteLine("-------------------------------");
             Console.Write("\r\nSelect Movie: ");
-
+            //selection of the desired movie
             string input;
             input = Console.ReadLine();
             Console.Clear();
@@ -719,7 +719,7 @@ namespace Project_B
         //End Choose Seat
 
         public static void ResetSeats()
-        {
+        { //Resets all seats to be available again 
             for (int i = 5; i > 0; i--)
             {
                 dynamic jsonSelectedSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
@@ -753,7 +753,7 @@ namespace Project_B
         }
 
         public static void ResetSelectedSeats(int hall)
-        {
+        { //Resets selected seats to go from occupied to available 
             var JObject1 = JObject.Parse(File.ReadAllText(@"Seats.json"));
             var seats = JObject1.SelectToken($"$.SeatsHall{hall}").Values<string>().ToList();
             var selectedSeatsList = JObject1.SelectToken($"$.SelectedSeats").Values<string>().ToList();
@@ -775,7 +775,7 @@ namespace Project_B
         }
 
         public static void ResetSelectedSeats()
-        {
+        { 
             for (int i = 5; i > 0; i--)
             {
                 dynamic jsonSelectedSeats = JsonConvert.DeserializeObject(File.ReadAllText(@"Seats.json"));
@@ -786,7 +786,7 @@ namespace Project_B
         }
 
         public static void PrintSeats(int hall)
-        {
+        { //Shows the seats in the venues
             int maxSeats = 0;
             if (hall == 1)
             {
@@ -856,7 +856,7 @@ namespace Project_B
                 string[] MvDTime = new string[(movieDays.Length * movieTimes.Length)];
                 int counterD = 0;
                 int counterT = 0;
-                for (int i = 0; i < MvDTime.Length; i++)
+                for (int i = 0; i < MvDTime.Length; i++) //Creating a array with the possible days and times for movies to play at the venues
                 {
                     if (counterD > 4)
                     {
@@ -913,7 +913,7 @@ namespace Project_B
 
 
         }
-        public static void VnDFrontend(string MovieName, string Date, string Date2, string Date3, int previousScreen, Clickstream userClick)//Dit hoort bij de nieuwe venue and date
+        public static void VnDFrontend(string MovieName, string Date, string Date2, string Date3, int previousScreen, Clickstream userClick)//The front end for the Venue and date selection screen
         {
             Console.WriteLine("You chose the movie: " + MovieName);
             Console.WriteLine("--------------------------------------------");
@@ -922,11 +922,11 @@ namespace Project_B
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine("Please type in the number of your choice to continue");
             string choice = Console.ReadLine();
-            if (choice == "1")
+            if (choice == "1")//Giving the Date and Venue selection to the choose seat screen
             {
                 userClick.AddInput("Choose Seat => ");
                 SeatOptions.ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5, Date , userClick);
-            }//De choose seat is nog niet aangepast om ook een datum aan te nemen, wanneer dat is gedaan kan hier ook de date worden meegegeven
+            }
             if (choice == "2")
             {
                 userClick.AddInput("Choose Seat => ");
@@ -943,7 +943,7 @@ namespace Project_B
     class PaymentSettings {
         public static void Payment(Clickstream userClick)
         {
-
+            //Selecting a payment option 
 
             Console.WriteLine("                                                -Choose your payment method-\n\n");
             Console.WriteLine("                                             Type in the number of your paymentmethod\n");
@@ -972,7 +972,7 @@ namespace Project_B
                 ConsoleKeyInfo keyInfo;
                 keyInfo = Console.ReadKey();
                 if (keyInfo.Key == ConsoleKey.Enter)
-                {
+                {  // The transaction part of the payment process
                     Console.Clear();
                     Console.Beep();
                     Console.WriteLine(paymentMethods[0] + "\n");
@@ -1219,7 +1219,7 @@ namespace Project_B
 
 
         public static void Offers(Clickstream userClick)
-        {
+        {  // Screen showing offers like discounts 
             string input;
             Console.WriteLine("These are our offers:\r\n");
             Console.WriteLine("10% Discount (Valid for 65+, teens (12 to 17)\r\n");
@@ -1249,7 +1249,7 @@ namespace Project_B
         }
 
         public static void ShowDailyRevenue(int i, Clickstream userClick)
-        {
+        {  //Shows the daily revenue which is stored in a JSON file
             string input;
             var currentDailyRevenue = File.ReadAllText(@"DailyRevenue.json");
             var JObject1 = JObject.Parse(currentDailyRevenue);
@@ -1283,7 +1283,7 @@ namespace Project_B
         }
 
         public static void IncrDailyRevenue(int i, Clickstream userClick)
-        {
+        { // Method used to add to the daily revenue
             var currentDailyRevenue = File.ReadAllText(@"DailyRevenue.json");
             dynamic DailyRevenue = JsonConvert.DeserializeObject(currentDailyRevenue);
 
@@ -1298,7 +1298,7 @@ namespace Project_B
         }
 
         public static void ResetRevenue()
-        {
+        { //Resets the daily Revenue to 0
             var currentDailyRevenue = File.ReadAllText(@"DailyRevenue.json");
             dynamic DailyRevenue = JsonConvert.DeserializeObject(currentDailyRevenue);
 
