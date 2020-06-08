@@ -712,7 +712,12 @@ namespace Project_B
                         MovieOptions.MovieList(previousScreen, userClick);
                         break;
                     }
-               
+                default:
+                    {
+                        ChooseSeat(hall, movie, previousScreen, selectedSeats, selectedSeatsArray, error, max, Date, userClick);
+                        break;
+                    }
+
             }
             // End User Input Oucome
         }
@@ -936,6 +941,11 @@ namespace Project_B
             {
                 userClick.AddInput("Choose Seat => ");
                 SeatOptions.ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5, Date3, userClick);
+            }
+            else
+            {
+                Console.Clear();
+                VnDFrontend(MovieName, Date, Date2, Date3, previousScreen, userClick);
             }
 
         }
