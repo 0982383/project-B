@@ -1214,6 +1214,11 @@ namespace Project_B
                     Payment(userClick);
                 }
             }
+            else
+            {
+                Payment(userClick);
+                break;
+            }
         }
 
 
@@ -1243,6 +1248,11 @@ namespace Project_B
                     {
                         userClick.AddInput("Customer Menu => ");
                         MainMenu.CustomerMenu(userClick);
+                        break;
+                    }
+                default:
+                    {
+                        Offers(userClick);
                         break;
                     }
             }
