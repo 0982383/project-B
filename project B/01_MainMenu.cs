@@ -712,11 +712,6 @@ namespace Project_B
                         MovieOptions.MovieList(previousScreen, userClick);
                         break;
                     }
-                default:
-                    {
-                        ChooseSeat(userClick);
-                        break;
-                    }
                
             }
             // End User Input Oucome
@@ -942,7 +937,6 @@ namespace Project_B
                 userClick.AddInput("Choose Seat => ");
                 SeatOptions.ChooseSeat(1, MovieName, previousScreen, null, new string[5], null, 5, Date3, userClick);
             }
-           
 
         }
     }
@@ -1199,7 +1193,7 @@ namespace Project_B
                         Console.WriteLine("Transaction completed. \n Thank you for you payment.");
                         Console.Beep();
                         userClick.AddInput("Bought With Google Pay => ");
-                        IncrDailyRevenue(10, userClick);
+                        IncrDailyRevenue(10, userClick);                      
                     }
                     else
                     {
@@ -1219,11 +1213,6 @@ namespace Project_B
                     Console.WriteLine("you did not press enter :/");
                     Payment(userClick);
                 }
-            }
-            else
-            {
-                Console.Clear();
-                Payment(userClick);
             }
         }
 
@@ -1254,11 +1243,6 @@ namespace Project_B
                     {
                         userClick.AddInput("Customer Menu => ");
                         MainMenu.CustomerMenu(userClick);
-                        break;
-                    }
-                default:
-                    {
-                        Offers(userClick);
                         break;
                     }
             }
@@ -1294,11 +1278,6 @@ namespace Project_B
                             MainMenu.Employee(userClick);
                             break;
                         }
-                    }
-                default:
-                    {
-                        ShowDailyRevenue(userClick);
-                        break;
                     }
             }
         }
