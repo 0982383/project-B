@@ -61,6 +61,7 @@ namespace Project_B
                     }
             }
         }
+        // Logging in(staff)
         public static void LoginScreen(Clickstream userClick)
         {
             Console.WriteLine("Hello , Enter you're username");
@@ -119,6 +120,7 @@ namespace Project_B
 
             }
         }
+        // customer options
         public static void CustomerMenu(Clickstream userClick)
         {
             string OPT2;
@@ -159,7 +161,7 @@ namespace Project_B
                     }
             }
         }
-
+        // staff options
         public static void StaffMenu(Clickstream userClick)
         {
             string OPT3;
@@ -328,7 +330,7 @@ namespace Project_B
     class MovieOptions {
         public static void AddMovie(Clickstream userClick)
         {
-            // json file should be updated @issie
+            // calling json file to edit available movies
             var JsonString = File.ReadAllText(@"List.json");
             var JObject1 = JObject.Parse(JsonString);
             Console.WriteLine(JObject1.SelectToken("Title").Value<string>());
@@ -414,7 +416,7 @@ namespace Project_B
                     }
             }
         }
-
+        // choosing movie type before selecting movie
         public static void MovieType(Clickstream userClick)
         {
             string OPT;
@@ -456,7 +458,7 @@ namespace Project_B
                     }
             }
         }
- 
+        // calling movie list + selecting venue
         public static void MovieList(int previousScreen, Clickstream userClick)
         {
             var JsonString = File.ReadAllText(@"List.json");
