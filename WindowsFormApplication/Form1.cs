@@ -9,12 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.IO;
+
 
 namespace WindowsFormApplication
 {
+
+
     public partial class Form1 : Form
     {
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\tommy\OneDrive\Documenten\Data.mdf;Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -37,38 +43,54 @@ namespace WindowsFormApplication
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\tommy\OneDrive\Documenten\Data.mdf;Integrated Security=True;Connect Timeout=30");
-            SqlDataAdapter sda = new SqlDataAdapter("Select Count(*) From Login where Username ='"+textBox1Username.Text+"' and Password='" + textBox1Password.Text + "'",con);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            if(dt.Rows[0][0].ToString()== "1")
+            string inputpassWord = textBox1Password.Text;
+            string inputUsername = textBox1Username.Text;
+            var accounts = JObject.Parse(File.ReadAllText(@"ListOfAccounts.json"));
+            var userName = accounts.SelectToken("$.Username").Values<string>().ToList();
+            var PassWord = accounts.SelectToken("$.Password").Values<string>().ToList();
+            bool login = false;
+            for (int i = 0; i < userName.Count; i++)
             {
-                this.Hide();
+                if (inputUsername == userName[i] && inputpassWord == PassWord[i])
+                {
+                   
+                        Main feuzi = new Main();
+                        feuzi.Show();
+                        login = true;
+                        
+                        
 
-                Main ss = new Main();
-                ss.Show();
+
+                }
+                
+                
+
+                
             }
-            else
+            if (login == false)
             {
-                MessageBox.Show("Please check you're username and password.");
+                MessageBox.Show("Wrong username or password");
             }
             
+            
+
+
+
+
+
         }
         private void button2_Click(object sender, EventArgs e)
         {
+
+            dynamic jsonAccount = JsonConvert.DeserializeObject(File.ReadAllText(@"ListOfAccounts.json"));
+            jsonAccount["Username"].Add(textBox1Username.Text);
+            jsonAccount["Password"].Add(textBox1Password.Text);
+            string output = JsonConvert.SerializeObject(jsonAccount, Formatting.Indented);
+            File.WriteAllText(@"ListOfAccounts.json", output);
+            Main feuzi = new Main();
             
-            using (SqlConnection sqlCon = new SqlConnection(connectionString))
-            {
-                sqlCon.Open();
-                SqlCommand sqlCmd = new SqlCommand("Useradd", sqlCon);
-                sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@USERNAME", textBox1Username.Text.Trim());
-                sqlCmd.Parameters.AddWithValue("@PASSWORD", textBox1Password.Text.Trim());
-                sqlCmd.ExecuteNonQuery();
-                MessageBox.Show("Registration is succesfull!");
-            }
-           
+            feuzi.Show();
+
 
         }
         private void Text1_Click(object sender, EventArgs e)
