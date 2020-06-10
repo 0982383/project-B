@@ -57,26 +57,13 @@ namespace WindowsFormApplication
                         Main feuzi = new Main();
                         feuzi.Show();
                         login = true;
-                        
-                        
-
-
                 }
-                
-                
 
-                
             }
             if (login == false)
             {
                 MessageBox.Show("Wrong username or password");
             }
-            
-            
-
-
-
-
 
         }
         private void button2_Click(object sender, EventArgs e)
