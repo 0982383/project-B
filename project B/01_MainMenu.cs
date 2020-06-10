@@ -361,7 +361,7 @@ namespace Project_B
                         Console.Write("Name of the movie:");
                         string AddMovieInput = Console.ReadLine();
                         int Counter = myList.Count + 1;
-                        string Combine = Counter + ") " + AddMovieInput;
+                        string Combine = AddMovieInput + " Comming Soon!";
 
                         //Opening JSON file that needs to be modified
                         var initialJSON = File.ReadAllText(@"List.json");
@@ -1339,11 +1339,13 @@ namespace Project_B
             Input = "";
         }
         
+        // This method adds the input to a clickstream object
         public void AddInput(string addedInput)
         {
             Input += addedInput;
         }
 
+        // This method will parse the current users clickstream input to a json file.
         public void AddToJson()
         {
             //Opening JSON file that needs to be modified
