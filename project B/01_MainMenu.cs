@@ -75,41 +75,41 @@ namespace Project_B
             var account2 = JObject1.SelectToken("$.Feuzi").Value<string>();
             var account3 = JObject1.SelectToken("$.Jordi").Value<string>();
             var account4 = JObject1.SelectToken("$.Ismail").Value<string>();
-            var account5 = JObject1.SelectToken("$.Patryck").Value<string>();
+            var account5 = JObject1.SelectToken("$.Patryk").Value<string>();
             if (inputpassWord == account1)
             {
 
                 Console.Clear();
                 Console.WriteLine("You have logged in.");
-                userClick.AddInput("Tom Customer Test => ");
-                CustomerMenu(userClick);
+                userClick.AddInput("Tom Staff => ");
+                StaffMenu(userClick);
             }
             else if (inputpassWord == account2)
             {
                 Console.Clear();
                 Console.WriteLine("You have logged in.");
-                userClick.AddInput("Feuzi Customer Test => ");
-                CustomerMenu(userClick);
+                userClick.AddInput("Feuzi Staff => ");
+                StaffMenu(userClick);
             }
             else if (inputpassWord == account3)
             {
                 Console.Clear();
                 Console.WriteLine("You have logged in.");
-                userClick.AddInput("Jordi Customer Test => ");
-                CustomerMenu(userClick);
+                userClick.AddInput("Jordi Staff => ");
+                StaffMenu(userClick);
             }
             else if (inputpassWord == account4)
             {
                 Console.Clear();
                 Console.WriteLine("You have logged in.");
-                userClick.AddInput("Ismail Staff Test => ");
+                userClick.AddInput("Ismail Staff => ");
                 StaffMenu(userClick);
             }
             else if (inputpassWord == account5)
             {
                 Console.Clear();
                 Console.WriteLine("You have logged in.");
-                userClick.AddInput("Patryck staff Test => ");
+                userClick.AddInput("Patryck staff => ");
                 StaffMenu(userClick);
             }
             else
